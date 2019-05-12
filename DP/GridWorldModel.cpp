@@ -5,8 +5,8 @@
 
 namespace GridWorld {
 
-std::vector<std::tuple<DP::Reward, DP::Probability, DP::State>> Model::Transition(
-    DP::State state, DP::Action action) const {
+std::vector<std::tuple<DP::Reward, DP::Probability, DP::State>>
+Model::Transition(DP::State state, DP::Action action) const {
   std::vector<std::tuple<DP::Reward, DP::Probability, DP::State>> returns;
   int x = state / grid_size_, y = state % grid_size_;
 
@@ -34,4 +34,4 @@ bool Model::IsTerminalState(DP::State state) const {
   return (state == 0) || (state == grid_size_ * grid_size_ - 1);
 }
 
-}  // namespace DGridWorld
+}  // namespace GridWorld
