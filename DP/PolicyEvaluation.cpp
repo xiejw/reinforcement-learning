@@ -21,7 +21,7 @@
 constexpr int kGridSize = 4;
 
 void PrintValues(ValueFunction &value_function) {
-  const float *const values = value_function.Values();
+  float *const values = value_function.Values();
   for (int i = 0; i < kGridSize; ++i) {
     for (int j = 0; j < kGridSize; ++j)
       std::cout << std::setprecision(3) << std::setw(6)
@@ -32,15 +32,19 @@ void PrintValues(ValueFunction &value_function) {
 }
 
 void Update(const DP::Model &model, const DP::Policy &policy,
-            ValueFunction &value_function, bool inPlace = true) {
-  const int state_space_size = value_function.Size();
-  float *const values = value_function.Values();
-  std::unique_ptr<float[]> newValues;
-  // FIXME: New VAlues.
-  if (!inPlace) newValues.reset(new float[state_space_size]{0});
+            ValueFunction &old_value_function,
+            ValueFunction &new_value_function) {
+  const int state_space_size = old_value_function.Size();
+  assert(state_space_size == new_value_function.Size());
+
+  float *const old_values = old_value_function.Values();
+  float *const new_values = new_value_function.Values();
 
   for (DP::State state = 0; state < state_space_size; ++state) {
-    if (model.IsTerminalState(state)) continue;
+    if (model.IsTerminalState(state)) {
+      new_values[state] = old_values[state];
+      continue;
+    }
 
     float new_value = 0;
     for (auto &actionChoice : policy.Actions(state)) {
@@ -53,30 +57,42 @@ void Update(const DP::Model &model, const DP::Policy &policy,
         auto &new_state = std::get<2>(transition);
 
         new_value += action_probability * state_probability *
-                     (reward + values[new_state]);
+                     (reward + old_values[new_state]);
       }
     }
 
-    if (inPlace)
-      values[state] = new_value;
-    else
-      newValues[state] = new_value;
+    new_values[state] = new_value;
+  }
+}
+
+void Update(const DP::Model &model, const DP::Policy &policy,
+            std::unique_ptr<ValueFunction> &value_function,
+            bool inPlace = true) {
+  if (inPlace) {
+    Update(model, policy, *value_function, *value_function);
+    return;
   }
 
-  if (!inPlace) value_function.Swap(std::move(newValues));
+  // Creates a new buffer.
+  const int state_space_size = value_function->Size();
+  std::unique_ptr<ValueFunction> new_value_function{
+      new ValueFunction{state_space_size}};
+  Update(model, policy, *value_function, *new_value_function);
+  value_function.swap(new_value_function);
 }
 
 int main() {
-  ValueFunction value_function(/*state_space_size=*/kGridSize * kGridSize);
+  auto value_function = std::make_unique<ValueFunction>(
+      /*state_space_size=*/kGridSize * kGridSize);
   DP::GridWorldModel model(kGridSize);
   DP::GridWorldRandomPolicy policy;
 
-  PrintValues(value_function);
+  PrintValues(*value_function);
 
   for (int k = 0; k < 100; ++k) {
     std::cout << "\nStage " << k << ":\n";
     Update(model, policy, value_function, /*inPlace=*/true);
-    PrintValues(value_function);
+    PrintValues(*value_function);
   }
   return 0;
 }
