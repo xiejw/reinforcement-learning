@@ -13,8 +13,8 @@
 #include <iostream>
 #include <memory>
 
-#include "Model.h"
-#include "Policy.h"
+#include "GridWorldModel.h"
+#include "GridWorldPolicy.h"
 #include "ValueFunction.h"
 
 // The width and height of grid.

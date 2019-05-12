@@ -11,8 +11,6 @@ class ValueFunction {
 
   float *const Values() { return values_.get(); }
 
-  void Swap(std::unique_ptr<float[]> new_values) { values_.swap(new_values); }
-
   int Size() { return state_space_size_; }
 
  private:

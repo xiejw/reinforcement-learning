@@ -13,7 +13,7 @@ HEADERS := $(shell find . -type f -name '*.h')
 PolicyEvaluation: ${BIN}/PolicyEvaluation
 
 
-${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${BIN}/Policy.o ${BIN}/Model.o
+${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${BIN}/GridWorldPolicy.o ${BIN}/GridWorldModel.o
 	${CXX} -o $@ $^
 
 ${BIN}:

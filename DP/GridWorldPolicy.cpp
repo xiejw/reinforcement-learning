@@ -1,7 +1,7 @@
 #include <utility>
 #include <vector>
 
-#include "Policy.h"
+#include "GridWorldPolicy.h"
 
 namespace DP {
 
