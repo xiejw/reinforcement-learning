@@ -1,5 +1,13 @@
 // Given a policy, e.g., random policy in this case, evaluate the value
 // function.
+//
+// Final values should be
+//     0    -14    -20    -22
+//   -14    -18    -20    -20
+//   -20    -20    -18    -14
+//   -22    -20    -14      0
+//
+// `inPlace==true` converges faster.
 #include <cassert>
 #include <iomanip>
 #include <iostream>
@@ -60,9 +68,9 @@ int main() {
   std::unique_ptr<float[]> values{new float[kGridSize * kGridSize]{0}};
   PrintValues(values);
 
-  for (int k = 0; k < 10; ++k) {
+  for (int k = 0; k < 100; ++k) {
     std::cout << "\nStage " << k << ":\n";
-    Update(values, /*inPlace=*/false);
+    Update(values, /*inPlace=*/true);
     PrintValues(values);
   }
   return 0;
