@@ -13,12 +13,12 @@
 #include <iostream>
 #include <memory>
 
+#include "Model.h"
 #include "Policy.h"
 #include "ValueFunction.h"
 
 // The width and height of grid.
 constexpr int kGridSize = 4;
-constexpr int kNeighborCount = 4;
 
 void PrintValues(ValueFunction &value_function) {
   const float *const values = value_function.Values();
@@ -31,39 +31,36 @@ void PrintValues(ValueFunction &value_function) {
   }
 }
 
-inline bool IsTerminalState(int i, int j) {
-  return (i == 0 && j == 0) || (i == kGridSize - 1 && j == kGridSize - 1);
-}
-
-inline std::unique_ptr<int[]> Neighbors(int i, int j) {
-  assert(kNeighborCount == 4);
-  std::unique_ptr<int[]> neighbors(new int[kNeighborCount]);
-  neighbors[0] = j + kGridSize * (i > 0 ? i - 1 : i);              // Up
-  neighbors[1] = j + kGridSize * (i < kGridSize - 1 ? i + 1 : i);  // Down
-  neighbors[2] = i * kGridSize + (j > 0 ? j - 1 : j);              // Left
-  neighbors[3] = i * kGridSize + (j < kGridSize - 1 ? j + 1 : j);  // Right
-  return neighbors;
-}
-
-void Update(ValueFunction &value_function, bool inPlace = true) {
+void Update(const DP::Model &model, const DP::Policy &policy,
+            ValueFunction &value_function, bool inPlace = true) {
+  const int state_space_size = value_function.Size();
   float *const values = value_function.Values();
   std::unique_ptr<float[]> newValues;
-  if (!inPlace) newValues.reset(new float[kGridSize * kGridSize]{0});
+  // FIXME: New VAlues.
+  if (!inPlace) newValues.reset(new float[state_space_size]{0});
 
-  for (int i = 0; i < kGridSize; ++i) {
-    for (int j = 0; j < kGridSize; ++j) {
-      if (IsTerminalState(i, j)) continue;
+  for (DP::State state = 0; state < state_space_size; ++state) {
+    if (model.IsTerminalState(state)) continue;
 
-      const auto &neighbors = Neighbors(i, j);
-      float newValue = 0;
-      for (int k = 0; k < kNeighborCount; ++k)
-        newValue += -1 + values[neighbors[k]];
+    float new_value = 0;
+    for (auto &actionChoice : policy.Actions(state)) {
+      auto &action_probability = actionChoice.first;
+      auto &action = actionChoice.second;
 
-      if (inPlace)
-        values[i * kGridSize + j] = newValue / 4;
-      else
-        newValues[i * kGridSize + j] = newValue / 4;
+      for (auto &transition : model.Transition(state, action)) {
+        auto &reward = std::get<0>(transition);
+        auto &state_probability = std::get<1>(transition);
+        auto &new_state = std::get<2>(transition);
+
+        new_value += action_probability * state_probability *
+                     (reward + values[new_state]);
+      }
     }
+
+    if (inPlace)
+      values[state] = new_value;
+    else
+      newValues[state] = new_value;
   }
 
   if (!inPlace) value_function.Swap(std::move(newValues));
@@ -71,11 +68,14 @@ void Update(ValueFunction &value_function, bool inPlace = true) {
 
 int main() {
   ValueFunction value_function(/*state_space_size=*/kGridSize * kGridSize);
+  DP::GridWorldModel model(kGridSize);
+  DP::GridWorldRandomPolicy policy;
+
   PrintValues(value_function);
 
   for (int k = 0; k < 100; ++k) {
     std::cout << "\nStage " << k << ":\n";
-    Update(value_function, /*inPlace=*/true);
+    Update(model, policy, value_function, /*inPlace=*/true);
     PrintValues(value_function);
   }
   return 0;

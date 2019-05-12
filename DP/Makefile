@@ -13,8 +13,8 @@ HEADERS := $(shell find . -type f -name '*.h')
 PolicyEvaluation: ${BIN}/PolicyEvaluation
 
 
-${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${BIN}/Policy.o
-	${CXX} -o $@ $<
+${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${BIN}/Policy.o ${BIN}/Model.o
+	${CXX} -o $@ $^
 
 ${BIN}:
 	mkdir -p ${BIN}

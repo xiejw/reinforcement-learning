@@ -9,15 +9,18 @@ namespace DP {
 
 using State = int;
 using Probability = float;
+using Action = int;
 
-enum Action { up, down, left, right };
+enum GridWorldAction : Action { up = 0, down, left, right };
 
 class Policy {
+ public:
   virtual std::vector<std::pair<Probability, Action>> Actions(
-      State state) const;
+      State state) const = 0;
 };
 
-class RandomPolicy : Policy {
+class GridWorldRandomPolicy : public Policy {
+ public:
   std::vector<std::pair<Probability, Action>> Actions(
       State state) const override;
 };
