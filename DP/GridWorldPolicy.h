@@ -7,16 +7,16 @@
 
 #include "Policy.h"
 
-namespace DP {
+namespace GridWorld {
 
-enum GridWorldAction : Action { up = 0, down, left, right };
+enum Action : DP::Action { up = 0, down, left, right };
 
-class GridWorldRandomPolicy : public Policy {
+class RandomPolicy : public DP::Policy {
  public:
-  std::vector<std::pair<Probability, Action>> Actions(
-      State state) const override;
+  std::vector<std::pair<DP::Probability, DP::Action>> Actions(
+      DP::State state) const override;
 };
 
-}  // namespace DP
+}  // namespace GridWorld
 
 #endif

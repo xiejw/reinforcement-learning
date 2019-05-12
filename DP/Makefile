@@ -10,7 +10,7 @@ HEADERS := $(shell find . -type f -name '*.h')
 
 .PHONY: PolicyEvaluation
 
-PolicyEvaluation: ${BIN}/PolicyEvaluation
+PolicyEvaluation: ${BIN} ${BIN}/PolicyEvaluation
 
 
 ${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${BIN}/GridWorldPolicy.o ${BIN}/GridWorldModel.o
@@ -19,8 +19,11 @@ ${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${BIN}/GridWorldPolicy.o ${BI
 ${BIN}:
 	mkdir -p ${BIN}
 
-${BIN}/%.o: %.cpp ${BIN} ${HEADERS}
+${BIN}/%.o: %.cpp
 	${CXX} ${CXXFLAGS} -c -o $@ $<
+
+clean:
+	rm -rf ${BIN}
 
 fmt:
 	find . -type f | grep -E "(.h|.cpp)$$" | xargs ${CLANG_FORMAT} ;

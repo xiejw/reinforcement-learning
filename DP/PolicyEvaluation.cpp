@@ -84,8 +84,8 @@ void Update(const DP::Model &model, const DP::Policy &policy,
 int main() {
   auto value_function = std::make_unique<ValueFunction>(
       /*state_space_size=*/kGridSize * kGridSize);
-  DP::GridWorldModel model(kGridSize);
-  DP::GridWorldRandomPolicy policy;
+  GridWorld::Model model(kGridSize);
+  GridWorld::RandomPolicy policy;
 
   PrintValues(*value_function);
 

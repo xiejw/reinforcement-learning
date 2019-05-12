@@ -8,21 +8,21 @@
 #include "Model.h"
 #include "Policy.h"
 
-namespace DP {
+namespace GridWorld {
 
-class GridWorldModel : public Model {
+class Model : public DP::Model {
  public:
-  GridWorldModel(int grid_size) : grid_size_{grid_size} {};
+  Model(int grid_size) : grid_size_{grid_size} {};
 
-  std::vector<std::tuple<Reward, Probability, State>> Transition(
-      State state, Action action) const override;
+  std::vector<std::tuple<DP::Reward, DP::Probability, DP::State>> Transition(
+      DP::State state, DP::Action action) const override;
 
-  bool IsTerminalState(State state) const override;
+  bool IsTerminalState(DP::State state) const override;
 
  private:
   int grid_size_;
 };
 
-}  // namespace DP
+}  // namespace GridWorld
 
 #endif
