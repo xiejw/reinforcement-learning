@@ -20,3 +20,6 @@ ${BIN}:
 
 ${BIN}/%.o: %.cpp ${BIN}
 	${CXX} ${CXXFLAGS} -c -o $@ $<
+
+fmt:
+	find . -type f | grep -E "(.h|.cpp)$$" | xargs ${CLANG_FORMAT} ;
