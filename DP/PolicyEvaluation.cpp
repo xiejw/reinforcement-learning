@@ -13,11 +13,14 @@
 #include <iostream>
 #include <memory>
 
+#include "ValueFunction.h"
+
 // The width and height of grid.
 constexpr int kGridSize = 4;
 constexpr int kNeighborCount = 4;
 
-void PrintValues(std::unique_ptr<float[]> &values) {
+void PrintValues(ValueFunction &value_function) {
+  const float *const values = value_function.Values();
   for (int i = 0; i < kGridSize; ++i) {
     for (int j = 0; j < kGridSize; ++j)
       std::cout << std::setprecision(3) << std::setw(6)
@@ -41,7 +44,8 @@ inline std::unique_ptr<int[]> Neighbors(int i, int j) {
   return neighbors;
 }
 
-void Update(std::unique_ptr<float[]> &values, bool inPlace = true) {
+void Update(ValueFunction &value_function, bool inPlace = true) {
+  float *const values = value_function.Values();
   std::unique_ptr<float[]> newValues;
   if (!inPlace) newValues.reset(new float[kGridSize * kGridSize]{0});
 
@@ -61,17 +65,17 @@ void Update(std::unique_ptr<float[]> &values, bool inPlace = true) {
     }
   }
 
-  if (!inPlace) values.swap(newValues);
+  if (!inPlace) value_function.Swap(std::move(newValues));
 }
 
 int main() {
-  std::unique_ptr<float[]> values{new float[kGridSize * kGridSize]{0}};
-  PrintValues(values);
+  ValueFunction value_function(/*state_space_size=*/kGridSize * kGridSize);
+  PrintValues(value_function);
 
   for (int k = 0; k < 100; ++k) {
     std::cout << "\nStage " << k << ":\n";
-    Update(values, /*inPlace=*/true);
-    PrintValues(values);
+    Update(value_function, /*inPlace=*/true);
+    PrintValues(value_function);
   }
   return 0;
 }

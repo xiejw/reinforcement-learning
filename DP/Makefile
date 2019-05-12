@@ -18,7 +18,7 @@ ${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o
 ${BIN}:
 	mkdir -p ${BIN}
 
-${BIN}/%.o: %.cpp ${BIN}
+${BIN}/%.o: %.cpp ${BIN} ValueFunction.h
 	${CXX} ${CXXFLAGS} -c -o $@ $<
 
 fmt:
