@@ -1,5 +1,6 @@
 // Given a policy, e.g., random policy in this case, evaluate the value
 // function.
+#include <cassert>
 #include <iomanip>
 #include <iostream>
 #include <memory>
@@ -8,7 +9,7 @@
 constexpr int kGridSize = 4;
 constexpr int kNeighborCount = 4;
 
-void Print(float *values) {
+void PrintValues(std::unique_ptr<float[]> &values) {
   for (int i = 0; i < kGridSize; ++i) {
     for (int j = 0; j < kGridSize; ++j)
       std::cout << std::setprecision(3) << std::setw(6)
@@ -23,6 +24,7 @@ inline bool IsTerminalState(int i, int j) {
 }
 
 inline std::unique_ptr<int[]> Neighbors(int i, int j) {
+  assert(kNeighborCount == 4);
   std::unique_ptr<int[]> neighbors(new int[kNeighborCount]);
   neighbors[0] = j + kGridSize * (i > 0 ? i - 1 : i);              // Up
   neighbors[1] = j + kGridSize * (i < kGridSize - 1 ? i + 1 : i);  // Down
@@ -56,11 +58,12 @@ void Update(std::unique_ptr<float[]> &values, bool inPlace = true) {
 
 int main() {
   std::unique_ptr<float[]> values{new float[kGridSize * kGridSize]{0}};
-  Print(values.get());
+  PrintValues(values);
+
   for (int k = 0; k < 10; ++k) {
     std::cout << "\nStage " << k << ":\n";
-    Update(values, /*inPlace=*/true);
-    Print(values.get());
+    Update(values, /*inPlace=*/false);
+    PrintValues(values);
   }
   return 0;
 }
