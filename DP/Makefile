@@ -6,19 +6,20 @@ CXXFLAGS += -Wall -std=c++14 -I.
 
 SRCS := $(shell find . -type f -name '*.cpp')
 OBJ_FILES := $(patsubst %,${BIN}/%,$(SRCS:.cpp=.o))
+HEADERS := $(shell find . -type f -name '*.h')
 
 .PHONY: PolicyEvaluation
 
 PolicyEvaluation: ${BIN}/PolicyEvaluation
 
 
-${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o
+${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${BIN}/Policy.o
 	${CXX} -o $@ $<
 
 ${BIN}:
 	mkdir -p ${BIN}
 
-${BIN}/%.o: %.cpp ${BIN} ValueFunction.h
+${BIN}/%.o: %.cpp ${BIN} ${HEADERS}
 	${CXX} ${CXXFLAGS} -c -o $@ $<
 
 fmt:

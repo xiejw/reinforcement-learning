@@ -13,6 +13,7 @@
 #include <iostream>
 #include <memory>
 
+#include "Policy.h"
 #include "ValueFunction.h"
 
 // The width and height of grid.
