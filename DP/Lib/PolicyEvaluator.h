@@ -5,12 +5,23 @@
 #include <utility>
 #include <vector>
 
+#include "Lib/Model.h"
+#include "Lib/Policy.h"
+#include "Lib/ValueFunction.h"
+
 namespace DP {
 
-class Policy {
+class PolicyEvaluator {
  public:
-  virtual std::vector<std::pair<Probability, Action>> Actions(
-      State state) const = 0;
+  PolicyEvaluator(const Model &model, bool in_place = true)
+      : model_{model}, in_place_{in_place} {};
+
+  void Update(const Policy &policy,
+              std::unique_ptr<ValueFunction> &value_function) const;
+
+ private:
+  const Model &model_;
+  bool in_place_;
 };
 
 }  // namespace DP
