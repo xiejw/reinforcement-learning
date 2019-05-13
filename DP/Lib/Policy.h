@@ -15,6 +15,7 @@ class Policy {
  public:
   virtual std::vector<std::pair<Probability, Action>> Actions(
       State state) const = 0;
+  virtual ~Policy(){};
 };
 
 }  // namespace DP

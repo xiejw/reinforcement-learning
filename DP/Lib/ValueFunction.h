@@ -20,6 +20,6 @@ class ValueFunction {
   std::unique_ptr<float[]> values_;
 };
 
-} // namespace DP
+}  // namespace DP
 
 #endif

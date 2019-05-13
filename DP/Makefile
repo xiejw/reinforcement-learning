@@ -12,19 +12,26 @@ POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorldPolicy.o
 POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorldModel.o
 POLICY_EVALUATION_LIBS += ${BIN}/Lib/PolicyEvaluator.o
 
-.PHONY: PolicyEvaluation
 
+default: fmt PolicyEvaluation
+
+# {{{1 PolicyEvaluation
+.PHONY: PolicyEvaluation
 PolicyEvaluation: ${BIN} ${BIN}/PolicyEvaluation
 
 
 ${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${POLICY_EVALUATION_LIBS}
 	${CXX} -o $@ $^
 
+# {{{1 Default Actions.
+
 ${BIN}:
 	mkdir -p ${BIN} ${BIN}/Lib
 
 ${BIN}/%.o: %.cpp ${HEADERS}
 	${CXX} ${CXXFLAGS} -c -o $@ $<
+
+# {{{1 Maintenance.
 
 clean:
 	rm -rf ${BIN}
