@@ -8,21 +8,22 @@ SRCS := $(shell find . -type f -name '*.cpp')
 OBJ_FILES := $(patsubst %,${BIN}/%,$(SRCS:.cpp=.o))
 HEADERS := $(shell find . -type f -name '*.h')
 
+POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorldPolicy.o
+POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorldModel.o
+POLICY_EVALUATION_LIBS += ${BIN}/Lib/PolicyEvaluator.o
+
 .PHONY: PolicyEvaluation
 
 PolicyEvaluation: ${BIN} ${BIN}/PolicyEvaluation
 
 
-${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${BIN}/Lib/GridWorldPolicy.o ${BIN}/Lib/GridWorldModel.o ${BIN}/Lib/PolicyEvaluator.o
+${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${POLICY_EVALUATION_LIBS}
 	${CXX} -o $@ $^
 
 ${BIN}:
 	mkdir -p ${BIN} ${BIN}/Lib
 
-${BIN}/Lib/%.o: Lib/%.cpp
-	${CXX} ${CXXFLAGS} -c -o $@ $<
-
-${BIN}/%.o: %.cpp
+${BIN}/%.o: %.cpp ${HEADERS}
 	${CXX} ${CXXFLAGS} -c -o $@ $<
 
 clean:
