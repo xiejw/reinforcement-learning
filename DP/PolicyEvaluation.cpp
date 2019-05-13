@@ -20,8 +20,8 @@
 constexpr int kGridSize = 4;
 
 int main() {
-  std::unique_ptr<ValueFunction> value_function{
-      new ValueFunction{/*state_space_size=*/kGridSize * kGridSize}};
+  std::unique_ptr<DP::ValueFunction> value_function{
+      new DP::ValueFunction{/*state_space_size=*/kGridSize * kGridSize}};
 
   GridWorld::Model model(/*grid_size=*/kGridSize);
   GridWorld::RandomPolicy policy;

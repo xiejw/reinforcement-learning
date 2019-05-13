@@ -8,7 +8,7 @@
 
 namespace GridWorld {
 
-void PrintValues(ValueFunction &value_function, const int grid_size) {
+void PrintValues(DP::ValueFunction &value_function, const int grid_size) {
   float *const values = value_function.Values();
   for (int i = 0; i < grid_size; ++i) {
     for (int j = 0; j < grid_size; ++j)

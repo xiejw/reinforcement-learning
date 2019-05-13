@@ -3,6 +3,8 @@
 
 #include <memory>
 
+namespace DP {
+
 class ValueFunction {
  public:
   ValueFunction(int state_space_size) : state_space_size_{state_space_size} {
@@ -17,5 +19,7 @@ class ValueFunction {
   int state_space_size_;
   std::unique_ptr<float[]> values_;
 };
+
+} // namespace DP
 
 #endif
