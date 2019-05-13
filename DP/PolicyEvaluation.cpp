@@ -26,13 +26,13 @@ int main() {
   GridWorld::Model model(/*grid_size=*/kGridSize);
   GridWorld::RandomPolicy policy;
 
-  DP::PolicyEvaluator evaluator{model, /*inPlace=*/true};
+  DP::PolicyEvaluator evaluator{model, /*inPlace=*/false};
 
   GridWorld::PrintValues(*value_function, kGridSize);
-
-  for (int k = 0; k < 100; ++k) {
+  bool stop = false;
+  for (int k = 0; !stop; ++k) {
     std::cout << "\nStage " << k << ":\n";
-    evaluator.Update(policy, value_function);
+    if (evaluator.Update(policy, value_function) < 0.005) stop = true;
     GridWorld::PrintValues(*value_function, kGridSize);
   }
   return 0;

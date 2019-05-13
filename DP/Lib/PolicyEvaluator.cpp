@@ -1,4 +1,6 @@
+#include <algorithm>
 #include <cassert>
+#include <cmath>
 
 #include "Lib/PolicyEvaluator.h"
 
@@ -6,9 +8,10 @@ namespace DP {
 
 namespace {
 
-void UpdateValue(const DP::Model &model, const DP::Policy &policy,
-                 ValueFunction &old_value_function,
-                 ValueFunction &new_value_function) {
+float UpdateValue(const DP::Model &model, const DP::Policy &policy,
+                  ValueFunction &old_value_function,
+                  ValueFunction &new_value_function) {
+  float delta = 0.0;
   const int state_space_size = old_value_function.Size();
   assert(state_space_size == new_value_function.Size());
 
@@ -35,27 +38,29 @@ void UpdateValue(const DP::Model &model, const DP::Policy &policy,
                      (reward + old_values[new_state]);
       }
     }
-
+    delta = std::max(delta, std::abs(new_value - old_values[state]));
     new_values[state] = new_value;
   }
+  return delta;
 }
 
 }  // namespace
 
-void PolicyEvaluator::Update(
+float PolicyEvaluator::Update(
     const DP::Policy &policy,
     std::unique_ptr<ValueFunction> &value_function) const {
   if (in_place_) {
-    UpdateValue(model_, policy, *value_function, *value_function);
-    return;
+    return UpdateValue(model_, policy, *value_function, *value_function);
   }
 
   // Creates a new buffer.
   const int state_space_size = value_function->Size();
   std::unique_ptr<ValueFunction> new_value_function{
       new ValueFunction{state_space_size}};
-  UpdateValue(model_, policy, *value_function, *new_value_function);
+  float delta =
+      UpdateValue(model_, policy, *value_function, *new_value_function);
   value_function.swap(new_value_function);
+  return delta;
 }
 
 }  // namespace DP
