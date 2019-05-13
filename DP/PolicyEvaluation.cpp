@@ -13,9 +13,9 @@
 #include <iostream>
 #include <memory>
 
-#include "GridWorldModel.h"
-#include "GridWorldPolicy.h"
-#include "ValueFunction.h"
+#include "Lib/GridWorldModel.h"
+#include "Lib/GridWorldPolicy.h"
+#include "Lib/ValueFunction.h"
 
 // The width and height of grid.
 constexpr int kGridSize = 4;

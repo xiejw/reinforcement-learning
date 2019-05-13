@@ -1,7 +1,7 @@
 #include "Support/Error.h"
 
-#include "GridWorldModel.h"
-#include "GridWorldPolicy.h"
+#include "Lib/GridWorldModel.h"
+#include "Lib/GridWorldPolicy.h"
 
 namespace GridWorld {
 

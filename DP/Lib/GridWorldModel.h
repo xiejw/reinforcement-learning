@@ -5,8 +5,8 @@
 #include <tuple>
 #include <vector>
 
-#include "Model.h"
-#include "Policy.h"
+#include "Lib/Model.h"
+#include "Lib/Policy.h"
 
 namespace GridWorld {
 

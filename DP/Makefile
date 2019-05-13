@@ -13,11 +13,14 @@ HEADERS := $(shell find . -type f -name '*.h')
 PolicyEvaluation: ${BIN} ${BIN}/PolicyEvaluation
 
 
-${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${BIN}/GridWorldPolicy.o ${BIN}/GridWorldModel.o
+${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${BIN}/Lib/GridWorldPolicy.o ${BIN}/Lib/GridWorldModel.o
 	${CXX} -o $@ $^
 
 ${BIN}:
-	mkdir -p ${BIN}
+	mkdir -p ${BIN} ${BIN}/Lib
+
+${BIN}/Lib/%.o: Lib/%.cpp
+	${CXX} ${CXXFLAGS} -c -o $@ $<
 
 ${BIN}/%.o: %.cpp
 	${CXX} ${CXXFLAGS} -c -o $@ $<

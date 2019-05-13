@@ -1,7 +1,7 @@
 #include <utility>
 #include <vector>
 
-#include "GridWorldPolicy.h"
+#include "Lib/GridWorldPolicy.h"
 
 namespace GridWorld {
 
