@@ -6,7 +6,7 @@
 //   up    up  down  down
 //   up right right  down
 //
-// The result depends on the action search direction.
+// The result depends on the action search order.
 #include <iostream>
 #include <memory>
 
