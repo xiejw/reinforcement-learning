@@ -5,6 +5,7 @@
 #include <utility>
 #include <vector>
 
+#include "Lib/Model.h"
 #include "Lib/Policy.h"
 #include "Lib/ValueFunction.h"
 
@@ -26,15 +27,19 @@ class RandomPolicy : public DP::Policy {
 // policy, is used. After invoke `Adapt`, this policy acts greedily.
 class GreedyPolicy : public DP::Policy {
  public:
-  GreedyPolicy() : baseline_policy_{new RandomPolicy} {};
+  GreedyPolicy(const DP::Model& model)
+      : model_{model}, baseline_policy_{new RandomPolicy} {};
 
   std::vector<std::pair<DP::Probability, DP::Action>> Actions(
       DP::State state) const override;
 
   // Returns true if any change is made.
-  bool Adapt(DP::ValueFunction &value_function);
+  bool Adapt(DP::ValueFunction& value_function);
+
+  const Action* const Actions() const { return actions_.get(); };
 
  private:
+  const DP::Model& model_;
   std::unique_ptr<DP::Policy> baseline_policy_;
   std::unique_ptr<Action[]> actions_;
 };

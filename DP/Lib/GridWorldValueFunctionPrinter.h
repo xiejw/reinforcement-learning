@@ -4,6 +4,9 @@
 #include <iomanip>
 #include <iostream>
 
+#include "Lib/Support/Error.h"
+
+#include "Lib/GridWorldPolicy.h"
 #include "Lib/PolicyEvaluator.h"
 
 namespace GridWorld {
@@ -14,6 +17,29 @@ void PrintValues(DP::ValueFunction &value_function, const int grid_size) {
     for (int j = 0; j < grid_size; ++j)
       std::cout << std::setprecision(3) << std::setw(6)
                 << values[i * grid_size + j] << " ";
+
+    std::cout << "\n";
+  }
+}
+
+void PrintGreedyPolicy(const Action *const actions, const int grid_size) {
+  for (int i = 0; i < grid_size; ++i) {
+    for (int j = 0; j < grid_size; ++j) switch (actions[i * grid_size + j]) {
+        case Action::up:
+          std::cout << std::setw(6) << "up ";
+          break;
+        case Action::down:
+          std::cout << std::setw(6) << "down ";
+          break;
+        case Action::left:
+          std::cout << std::setw(6) << "left ";
+          break;
+        case Action::right:
+          std::cout << std::setw(6) << "right ";
+          break;
+        default:
+          eva::FatalError("Unsupported action %d", actions[i * grid_size + j]);
+      }
 
     std::cout << "\n";
   }

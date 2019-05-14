@@ -12,8 +12,11 @@ POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorldPolicy.o
 POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorldModel.o
 POLICY_EVALUATION_LIBS += ${BIN}/Lib/PolicyEvaluator.o
 
+POLICY_ITERATION_LIBS += ${BIN}/Lib/GridWorldPolicy.o
+POLICY_ITERATION_LIBS += ${BIN}/Lib/GridWorldModel.o
+POLICY_ITERATION_LIBS += ${BIN}/Lib/PolicyEvaluator.o
 
-default: fmt PolicyEvaluation
+default: fmt PolicyEvaluation PolicyIteration
 
 # {{{1 PolicyEvaluation
 .PHONY: PolicyEvaluation
@@ -21,6 +24,14 @@ PolicyEvaluation: ${BIN} ${BIN}/PolicyEvaluation
 
 
 ${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${POLICY_EVALUATION_LIBS}
+	${CXX} -o $@ $^
+
+# {{{1 PolicyIteration
+.PHONY: PolicyIteration
+PolicyIteration: ${BIN} ${BIN}/PolicyIteration
+
+
+${BIN}/PolicyIteration: ${BIN}/PolicyIteration.o ${POLICY_ITERATION_LIBS}
 	${CXX} -o $@ $^
 
 # {{{1 Default Actions.

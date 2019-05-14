@@ -1,13 +1,13 @@
-// Given a policy, e.g., random policy in this case, evaluate the value
-// function.
+// Policy Iteration Algorithm.
 //
 // Final values should be
-//     0    -14    -20    -22
-//   -14    -18    -20    -20
-//   -20    -20    -18    -14
-//   -22    -20    -14      0
+//   up  left  left  down
+//   up    up    up  down
+//   up    up  down  down
+//   up right right  down
 //
-// `inPlace==true` converges faster.
+// The result depends on the action search direction.
+#include <iostream>
 #include <memory>
 
 #include "Lib/GridWorldModel.h"
@@ -22,16 +22,25 @@ constexpr float kThreshold = 0.005;
 
 int main() {
   GridWorld::Model model(/*grid_size=*/kGridSize);
-  GridWorld::RandomPolicy policy;
+  GridWorld::GreedyPolicy policy{model};
 
   DP::PolicyEvaluator evaluator{model, /*inPlace=*/false};
 
-  std::unique_ptr<DP::ValueFunction> value_function{
-      new DP::ValueFunction{/*state_space_size=*/kGridSize * kGridSize}};
+  bool stop = false;
+  while (!stop) {
+    std::cout << "Policy Evaluation\n";
+    std::unique_ptr<DP::ValueFunction> value_function{
+        new DP::ValueFunction{/*state_space_size=*/kGridSize * kGridSize}};
 
-  while (true) {
-    if (evaluator.Update(policy, value_function) < kThreshold) break;
+    while (true)
+      if (evaluator.Update(policy, value_function) < kThreshold) break;
+
+    GridWorld::PrintValues(*value_function, kGridSize);
+
+    if (!policy.Adapt(*value_function)) stop = true;
+
+    std::cout << "New Policy\n";
+    GridWorld::PrintGreedyPolicy(policy.Actions(), kGridSize);
   }
-  GridWorld::PrintValues(*value_function, kGridSize);
   return 0;
 }

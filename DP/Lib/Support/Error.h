@@ -7,7 +7,8 @@
 
 namespace eva {
 
-void FatalError(const char *fmt, ...) {
+// inline to avoid duplicate symbols.
+inline void FatalError(const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
   vfprintf(stderr, fmt, args);

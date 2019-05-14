@@ -26,12 +26,37 @@ std::vector<std::pair<DP::Probability, DP::Action>> GreedyPolicy::Actions(
 
 bool GreedyPolicy::Adapt(DP::ValueFunction &value_function) {
   const int state_space_size = value_function.Size();
+  const float *const values = value_function.Values();
   std::unique_ptr<Action[]> new_actions{new Action[state_space_size]};
   bool changed = false;
+
+  // Iterate on all states. For each one, find the action with the maximum
+  // expected value.
   for (DP::State state = 0; state < state_space_size; ++state) {
-    // TODO: Take action and get the expected result.
-    new_actions[state] = Action::up;
+    bool first_time_visit = true;
+    float max_value = 0.0;
+    // Maintain the same action search order to ensure stable greed selection.
+    for (auto &action :
+         {Action::up, Action::down, Action::left, Action::right}) {
+      float new_value = 0.0;
+      for (auto &transition : model_.Transition(state, action)) {
+        auto &reward = std::get<0>(transition);
+        auto &state_probability = std::get<1>(transition);
+        auto &new_state = std::get<2>(transition);
+        new_value += state_probability * (reward + values[new_state]);
+      }
+
+      // Bookkeeping.
+      if (first_time_visit || new_value > max_value) {
+        first_time_visit = false;
+        max_value = new_value;
+        new_actions[state] = action;
+      }
+    }
+    if (actions_.get() == nullptr || new_actions[state] != actions_[state])
+      changed = true;
   }
+  if (changed) actions_.swap(new_actions);
   return changed;
 };
 
