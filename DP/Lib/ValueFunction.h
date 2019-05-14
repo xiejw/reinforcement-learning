@@ -1,6 +1,7 @@
 #ifndef VALUE_FUNCTION
 #define VALUE_FUNCTION
 
+#include <chrono>
 #include <memory>
 #include <random>
 
