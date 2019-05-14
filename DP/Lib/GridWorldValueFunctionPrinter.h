@@ -4,10 +4,9 @@
 #include <iomanip>
 #include <iostream>
 
-#include "Lib/Support/Error.h"
-
 #include "Lib/GridWorldPolicy.h"
 #include "Lib/PolicyEvaluator.h"
+#include "Lib/Support/Error.h"
 
 namespace GridWorld {
 

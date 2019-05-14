@@ -1,6 +1,6 @@
-#include "Lib/Support/Error.h"
-
 #include "Lib/Model.h"
+
+#include "Lib/Support/Error.h"
 
 namespace DP {
 
