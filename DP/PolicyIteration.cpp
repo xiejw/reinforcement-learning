@@ -26,17 +26,20 @@ int main() {
 
   DP::PolicyEvaluator evaluator{model, /*inPlace=*/false};
 
+  // The outer loop to detect whether optimial greedy policy is stable or not.
   bool stop = false;
   while (!stop) {
     std::cout << "Policy Evaluation\n";
     std::unique_ptr<DP::ValueFunction> value_function{
         new DP::ValueFunction{/*state_space_size=*/kGridSize * kGridSize}};
 
-    while (true)
-      if (evaluator.Update(policy, value_function) < kThreshold) break;
+    // The inner loop to perform Policy evaluation.
+    while (evaluator.Update(policy, value_function) >= kThreshold)
+      ;
 
     GridWorld::PrintValues(*value_function, kGridSize);
 
+    // Make the policy greedy w.r.t. current value function.
     if (!policy.Adapt(*value_function)) stop = true;
 
     std::cout << "New Policy\n";
