@@ -40,8 +40,7 @@
   - [Exercise](PolicyIteration.cpp)
 
 - Implement Value Iteration in Python (Gridworld)
-  - [Exercise](Value%20Iteration.ipynb)
-  - [Solution](Value%20Iteration%20Solution.ipynb)
+  - [Exercise](ValueIteration.cpp)
 
 - Implement Gambler's Problem
   - [Exercise](Gamblers%20Problem.ipynb)
