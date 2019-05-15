@@ -23,7 +23,8 @@ void PrintValues(DP::ValueFunction &value_function, const int grid_size) {
 
 void PrintGreedyPolicy(const Action *const actions, const int grid_size) {
   for (int i = 0; i < grid_size; ++i) {
-    for (int j = 0; j < grid_size; ++j) switch (actions[i * grid_size + j]) {
+    for (int j = 0; j < grid_size; ++j) {
+      switch ((int)actions[i * grid_size + j]) {
         case Action::up:
           std::cout << std::setw(6) << "up ";
           break;
@@ -36,9 +37,13 @@ void PrintGreedyPolicy(const Action *const actions, const int grid_size) {
         case Action::right:
           std::cout << std::setw(6) << "right ";
           break;
+        case DP::SpecialAction::na:
+          std::cout << std::setw(6) << "n/a ";
+          break;
         default:
           eva::FatalError("Unsupported action %d", actions[i * grid_size + j]);
       }
+    }
 
     std::cout << "\n";
   }
