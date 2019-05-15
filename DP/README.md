@@ -43,5 +43,4 @@
   - [Exercise](ValueIteration.cpp)
 
 - Implement Gambler's Problem
-  - [Exercise](Gamblers%20Problem.ipynb)
-  - [Solution](Gamblers%20Problem%20Solution.ipynb)
+  - [Exercise](GamblersProblem.cpp)
