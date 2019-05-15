@@ -1,5 +1,5 @@
-#ifndef GAMBLERPROBLEM_OLICY
-#define GAMBLERPROBLEM_OLICY
+#ifndef GAMBLERPROBLEM_POLICY
+#define GAMBLERPROBLEM_POLICY
 
 #include <memory>
 #include <utility>

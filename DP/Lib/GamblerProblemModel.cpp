@@ -38,8 +38,11 @@ const std::vector<DP::Action> Model::FeasibleActions(DP::State state) const {
 
   std::vector<DP::Action> feasible_actions;
   feasible_actions.reserve(action_count);
-  for (DP::Action action = 0; action <= max_value; ++action)
+  for (DP::Action action = 1; action <= max_value; ++action)
     feasible_actions.push_back(action);
+
+  // Cheating: 0 is always a feasiable action according to the gambler problem
+  feasible_actions.push_back(0);
   return feasible_actions;
 }
 

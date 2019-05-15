@@ -9,7 +9,11 @@ namespace DP {
 
 using State = int;
 using Probability = float;
+
+// All valid actions must be non-negnitive.
 using Action = int;
+
+enum SpecialAction : Action { na = -1 };
 
 class Policy {
  public:

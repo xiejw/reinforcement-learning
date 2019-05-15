@@ -35,8 +35,8 @@ bool GreedyPolicy::Adapt(DP::ValueFunction &value_function) {
   // expected value.
   for (DP::State state = 0; state < state_space_size; ++state) {
     if (model_.IsTerminalState(state)) {
-      // Choose any action.
-      new_actions[state] = Action::up;
+      // We choose the na (n/a) for terminal state.
+      new_actions[state] = (Action)DP::SpecialAction::na;
     } else {
       bool first_time_visit = true;
       float max_value = 0.0;

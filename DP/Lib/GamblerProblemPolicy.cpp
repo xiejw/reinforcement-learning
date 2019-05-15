@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <iostream>
 #include <utility>
 #include <vector>
 
@@ -40,8 +41,8 @@ bool GreedyPolicy::Adapt(DP::ValueFunction &value_function) {
   // expected value.
   for (DP::State state = 0; state < state_space_size; ++state) {
     if (model_.IsTerminalState(state)) {
-      // We choose the first one, which does not matter for terminal state.
-      new_actions[state] = 0;
+      // We choose the na (n/a) for terminal state.
+      new_actions[state] = DP::SpecialAction::na;
     } else {
       bool first_time_visit = true;
       float max_value = 0.0;

@@ -24,7 +24,7 @@ GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/GamblerProblemPolicy.o
 GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/GamblerProblemModel.o
 GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/PolicyEvaluator.o
 
-default: fmt PolicyEvaluation PolicyIteration ValueIteration
+default: fmt PolicyEvaluation PolicyIteration ValueIteration GamblerProblem
 
 # {{{1 PolicyEvaluation
 .PHONY: PolicyEvaluation
