@@ -12,14 +12,17 @@ POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorldPolicy.o
 POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorldModel.o
 POLICY_EVALUATION_LIBS += ${BIN}/Lib/PolicyEvaluator.o
 
+POLICY_ITERATION_LIBS += ${BIN}/Lib/GreedyPolicy.o
 POLICY_ITERATION_LIBS += ${BIN}/Lib/GridWorldPolicy.o
 POLICY_ITERATION_LIBS += ${BIN}/Lib/GridWorldModel.o
 POLICY_ITERATION_LIBS += ${BIN}/Lib/PolicyEvaluator.o
 
+VALUE_ITERATION_LIBS += ${BIN}/Lib/GreedyPolicy.o
 VALUE_ITERATION_LIBS += ${BIN}/Lib/GridWorldPolicy.o
 VALUE_ITERATION_LIBS += ${BIN}/Lib/GridWorldModel.o
 VALUE_ITERATION_LIBS += ${BIN}/Lib/PolicyEvaluator.o
 
+GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/GreedyPolicy.o
 GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/GamblerProblemPolicy.o
 GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/GamblerProblemModel.o
 GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/PolicyEvaluator.o

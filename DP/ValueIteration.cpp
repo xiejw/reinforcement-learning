@@ -27,6 +27,7 @@
 #include <iostream>
 #include <memory>
 
+#include "Lib/GreedyPolicy.h"
 #include "Lib/GridWorldModel.h"
 #include "Lib/GridWorldPolicy.h"
 #include "Lib/GridWorldPrinter.h"
@@ -39,7 +40,8 @@ constexpr double kThreshold = 0.0001;
 
 int main() {
   GridWorld::Model model(/*grid_size=*/kGridSize);
-  GridWorld::GreedyPolicy policy{model};
+  DP::GreedyPolicy policy{
+      model, std::unique_ptr<DP::Policy>{new GridWorld::RandomPolicy}};
 
   // Must use non-inplace update.
   DP::PolicyEvaluator evaluator{model, /*inPlace=*/false};

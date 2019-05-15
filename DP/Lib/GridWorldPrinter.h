@@ -21,7 +21,7 @@ void PrintValues(DP::ValueFunction &value_function, const int grid_size) {
   }
 }
 
-void PrintGreedyPolicy(const Action *const actions, const int grid_size) {
+void PrintGreedyPolicy(const DP::Action *const actions, const int grid_size) {
   for (int i = 0; i < grid_size; ++i) {
     for (int j = 0; j < grid_size; ++j) {
       switch ((int)actions[i * grid_size + j]) {

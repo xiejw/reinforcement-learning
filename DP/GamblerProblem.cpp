@@ -18,6 +18,7 @@
 #include "Lib/GamblerProblemModel.h"
 #include "Lib/GamblerProblemPolicy.h"
 #include "Lib/GamblerProblemPrinter.h"
+#include "Lib/GreedyPolicy.h"
 #include "Lib/PolicyEvaluator.h"
 #include "Lib/ValueFunction.h"
 
@@ -27,7 +28,8 @@ constexpr double kThreshold = 0.0001;
 int main() {
   const int state_space_size = kMaxValue + 1;
   GamblerProblem::Model model(state_space_size, /*probabiliby_head=*/0.25);
-  GamblerProblem::GreedyPolicy policy{model};
+  DP::GreedyPolicy policy{model, std::unique_ptr<DP::Policy>{
+                                     new GamblerProblem::RandomPolicy{model}}};
 
   // Must use non-inplace update.
   DP::PolicyEvaluator evaluator{model, /*inPlace=*/false};
