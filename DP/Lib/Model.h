@@ -9,7 +9,7 @@
 
 namespace DP {
 
-using Reward = float;
+using Reward = double;
 
 class Model {
  public:

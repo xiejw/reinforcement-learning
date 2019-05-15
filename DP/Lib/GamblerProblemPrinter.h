@@ -13,7 +13,7 @@ namespace GamblerProblem {
 
 void PrintValues(DP::ValueFunction &value_function) {
   assert(value_function.Size() == 101);
-  float *const values = value_function.Values();
+  double *const values = value_function.Values();
   for (DP::State state = 1; state < 100; ++state) {
     std::cout << std::setprecision(3) << std::setw(6) << values[state] << " ";
 

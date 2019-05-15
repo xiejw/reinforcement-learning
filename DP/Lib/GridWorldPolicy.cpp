@@ -27,7 +27,7 @@ std::vector<std::pair<DP::Probability, DP::Action>> GreedyPolicy::Actions(
 
 bool GreedyPolicy::Adapt(DP::ValueFunction &value_function) {
   const int state_space_size = value_function.Size();
-  const float *const values = value_function.Values();
+  const double *const values = value_function.Values();
   std::unique_ptr<Action[]> new_actions{new Action[state_space_size]};
   bool changed = false;
 
@@ -39,10 +39,10 @@ bool GreedyPolicy::Adapt(DP::ValueFunction &value_function) {
       new_actions[state] = (Action)DP::SpecialAction::na;
     } else {
       bool first_time_visit = true;
-      float max_value = 0.0;
+      double max_value = 0.0;
       // Maintain the same action search order to ensure stable greed selection.
       for (auto &action : model_.FeasibleActions(state)) {
-        float new_value = 0.0;
+        double new_value = 0.0;
         for (auto &transition : model_.Transition(state, action)) {
           auto &reward = std::get<0>(transition);
           auto &state_probability = std::get<1>(transition);

@@ -8,7 +8,7 @@
 namespace DP {
 
 using State = int;
-using Probability = float;
+using Probability = double;
 
 // All valid actions must be non-negnitive.
 using Action = int;

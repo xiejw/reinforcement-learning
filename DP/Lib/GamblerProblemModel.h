@@ -13,7 +13,7 @@ namespace GamblerProblem {
 class Model : public DP::Model {
  public:
   // seed = 0 means we use clock time.
-  Model(int state_space_size, float probability_head)
+  Model(int state_space_size, double probability_head)
       : state_space_size_{state_space_size},
         probability_head_{probability_head} {};
 
@@ -28,7 +28,7 @@ class Model : public DP::Model {
 
  private:
   int state_space_size_;
-  float probability_head_;
+  double probability_head_;
 };
 
 }  // namespace GamblerProblem

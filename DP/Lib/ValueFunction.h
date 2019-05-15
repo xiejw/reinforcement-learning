@@ -12,9 +12,9 @@ class ValueFunction {
   ValueFunction(int state_space_size, bool random = false)
       : state_space_size_{state_space_size} {
     if (!random) {
-      values_.reset(new float[state_space_size]{0});
+      values_.reset(new double[state_space_size]{0});
     } else {
-      values_.reset(new float[state_space_size]);
+      values_.reset(new double[state_space_size]);
       std::default_random_engine rng;
       rng.seed(std::chrono::system_clock::now().time_since_epoch().count());
       std::uniform_int_distribution<int> distribution(0, 10);
@@ -25,13 +25,13 @@ class ValueFunction {
     }
   }
 
-  float *const Values() { return values_.get(); }
+  double *const Values() { return values_.get(); }
 
   int Size() { return state_space_size_; }
 
  private:
   int state_space_size_;
-  std::unique_ptr<float[]> values_;
+  std::unique_ptr<double[]> values_;
 };
 
 }  // namespace DP

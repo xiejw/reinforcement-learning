@@ -13,7 +13,7 @@
 #include "Lib/ValueFunction.h"
 
 constexpr int kMaxValue = 100;
-constexpr float kThreshold = 0.0001;
+constexpr double kThreshold = 0.0001;
 
 int main() {
   const int state_space_size = kMaxValue + 1;

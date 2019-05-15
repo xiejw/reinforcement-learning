@@ -8,15 +8,15 @@ namespace DP {
 
 namespace {
 
-float UpdateValue(const DP::Model &model, const DP::Policy &policy,
-                  ValueFunction &old_value_function,
-                  ValueFunction &new_value_function) {
-  float delta = 0.0;
+double UpdateValue(const DP::Model &model, const DP::Policy &policy,
+                   ValueFunction &old_value_function,
+                   ValueFunction &new_value_function) {
+  double delta = 0.0;
   const int state_space_size = old_value_function.Size();
   assert(state_space_size == new_value_function.Size());
 
-  float *const old_values = old_value_function.Values();
-  float *const new_values = new_value_function.Values();
+  double *const old_values = old_value_function.Values();
+  double *const new_values = new_value_function.Values();
 
   for (DP::State state = 0; state < state_space_size; ++state) {
     if (model.IsTerminalState(state)) {
@@ -24,7 +24,7 @@ float UpdateValue(const DP::Model &model, const DP::Policy &policy,
       continue;
     }
 
-    float new_value = 0;
+    double new_value = 0;
     for (auto &actionChoice : policy.Actions(state)) {
       auto &action_probability = actionChoice.first;
       auto &action = actionChoice.second;
@@ -46,7 +46,7 @@ float UpdateValue(const DP::Model &model, const DP::Policy &policy,
 
 }  // namespace
 
-float PolicyEvaluator::Update(
+double PolicyEvaluator::Update(
     const DP::Policy &policy,
     std::unique_ptr<ValueFunction> &value_function) const {
   if (in_place_) {
@@ -57,7 +57,7 @@ float PolicyEvaluator::Update(
   const int state_space_size = value_function->Size();
   std::unique_ptr<ValueFunction> new_value_function{
       new ValueFunction{state_space_size}};
-  float delta =
+  double delta =
       UpdateValue(model_, policy, *value_function, *new_value_function);
   value_function.swap(new_value_function);
   return delta;

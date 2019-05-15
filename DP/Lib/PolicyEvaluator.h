@@ -16,8 +16,8 @@ class PolicyEvaluator {
   PolicyEvaluator(const Model &model, bool in_place = true)
       : model_{model}, in_place_{in_place} {};
 
-  float Update(const Policy &policy,
-               std::unique_ptr<ValueFunction> &value_function) const;
+  double Update(const Policy &policy,
+                std::unique_ptr<ValueFunction> &value_function) const;
 
  private:
   const Model &model_;

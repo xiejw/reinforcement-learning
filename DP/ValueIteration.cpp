@@ -35,7 +35,7 @@
 
 // The width and height of grid.
 constexpr int kGridSize = 4;
-constexpr float kThreshold = 0.0001;
+constexpr double kThreshold = 0.0001;
 
 int main() {
   GridWorld::Model model(/*grid_size=*/kGridSize);
