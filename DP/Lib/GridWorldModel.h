@@ -5,6 +5,7 @@
 #include <tuple>
 #include <vector>
 
+#include "Lib/GridWorldPolicy.h"
 #include "Lib/Model.h"
 #include "Lib/Policy.h"
 
@@ -18,6 +19,13 @@ class Model : public DP::Model {
       DP::State state, DP::Action action) const override;
 
   bool IsTerminalState(DP::State state) const override;
+
+  int StateSpaseSizt() const override { return grid_size_ * grid_size_; }
+
+  const std::vector<DP::Action> FeasibleActions(
+      DP::State state) const override {
+    return {Action::up, Action::down, Action::left, Action::right};
+  }
 
  private:
   int grid_size_;

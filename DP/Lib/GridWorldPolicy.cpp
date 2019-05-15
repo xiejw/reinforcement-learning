@@ -7,6 +7,7 @@ namespace GridWorld {
 
 std::vector<std::pair<DP::Probability, DP::Action>> RandomPolicy::Actions(
     DP::State state) const {
+  // TODO(xiejw): Use model feasible actions.
   std::vector<std::pair<DP::Probability, DP::Action>> actions;
   actions.reserve(4);
   actions.push_back(std::make_pair(0.25, Action::up));
@@ -33,24 +34,28 @@ bool GreedyPolicy::Adapt(DP::ValueFunction &value_function) {
   // Iterate on all states. For each one, find the action with the maximum
   // expected value.
   for (DP::State state = 0; state < state_space_size; ++state) {
-    bool first_time_visit = true;
-    float max_value = 0.0;
-    // Maintain the same action search order to ensure stable greed selection.
-    for (auto &action :
-         {Action::up, Action::down, Action::left, Action::right}) {
-      float new_value = 0.0;
-      for (auto &transition : model_.Transition(state, action)) {
-        auto &reward = std::get<0>(transition);
-        auto &state_probability = std::get<1>(transition);
-        auto &new_state = std::get<2>(transition);
-        new_value += state_probability * (reward + values[new_state]);
-      }
+    if (model_.IsTerminalState(state)) {
+      // Choose any action.
+      new_actions[state] = Action::up;
+    } else {
+      bool first_time_visit = true;
+      float max_value = 0.0;
+      // Maintain the same action search order to ensure stable greed selection.
+      for (auto &action : model_.FeasibleActions(state)) {
+        float new_value = 0.0;
+        for (auto &transition : model_.Transition(state, action)) {
+          auto &reward = std::get<0>(transition);
+          auto &state_probability = std::get<1>(transition);
+          auto &new_state = std::get<2>(transition);
+          new_value += state_probability * (reward + values[new_state]);
+        }
 
-      // Bookkeeping.
-      if (first_time_visit || new_value > max_value) {
-        first_time_visit = false;
-        max_value = new_value;
-        new_actions[state] = action;
+        // Bookkeeping.
+        if (first_time_visit || new_value > max_value) {
+          first_time_visit = false;
+          max_value = new_value;
+          new_actions[state] = (GridWorld::Action)action;
+        }
       }
     }
     if (actions_.get() == nullptr || new_actions[state] != actions_[state])
