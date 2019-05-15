@@ -22,8 +22,9 @@ void PrintValues(DP::ValueFunction &value_function) {
   std::cout << "\n";
 }
 
-void PrintGreedyPolicy(const DP::Action *const actions) {
-  for (DP::State state = 1; state < 100; ++state) {
+void PrintGreedyPolicy(const DP::Action *const actions,
+                       int max_state_to_print) {
+  for (DP::State state = 1; state <= max_state_to_print; ++state) {
     std::cout << std::setw(6) << actions[state];
     if (state % 25 == 0) std::cout << "\n";
   }

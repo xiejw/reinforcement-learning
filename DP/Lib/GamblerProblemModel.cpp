@@ -41,7 +41,8 @@ const std::vector<DP::Action> Model::FeasibleActions(DP::State state) const {
   for (DP::Action action = 1; action <= max_value; ++action)
     feasible_actions.push_back(action);
 
-  // Cheating: 0 is always a feasiable action according to the gambler problem
+  // Cheating: 0 is always a feasiable action according to the gambler problem.
+  // Place it at the bottom, so if there is a tie, choose non-zero bet.
   feasible_actions.push_back(0);
   return feasible_actions;
 }
