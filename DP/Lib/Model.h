@@ -16,6 +16,10 @@ class Model {
   virtual std::vector<std::tuple<Reward, Probability, State>> Transition(
       State state, Action action) const = 0;
 
+  virtual int StateSpaseSizt() const = 0;
+
+  virtual const std::vector<Action> FeasibleActions(State state) const = 0;
+
   virtual bool IsTerminalState(State state) const = 0;
 };
 

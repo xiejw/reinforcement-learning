@@ -20,6 +20,10 @@ VALUE_ITERATION_LIBS += ${BIN}/Lib/GridWorldPolicy.o
 VALUE_ITERATION_LIBS += ${BIN}/Lib/GridWorldModel.o
 VALUE_ITERATION_LIBS += ${BIN}/Lib/PolicyEvaluator.o
 
+GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/GamblerProblemPolicy.o
+GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/GamblerProblemModel.o
+GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/PolicyEvaluator.o
+
 default: fmt PolicyEvaluation PolicyIteration ValueIteration
 
 # {{{1 PolicyEvaluation
@@ -44,6 +48,14 @@ ValueIteration: ${BIN} ${BIN}/ValueIteration
 
 
 ${BIN}/ValueIteration: ${BIN}/ValueIteration.o ${VALUE_ITERATION_LIBS}
+	${CXX} -o $@ $^
+
+# {{{1 GamblerProblem
+.PHONY: GamblerProblem
+GamblerProblem: ${BIN} ${BIN}/GamblerProblem
+
+
+${BIN}/GamblerProblem: ${BIN}/GamblerProblem.o ${GAMBLER_PROBLEM__LIBS}
 	${CXX} -o $@ $^
 
 # {{{1 Default Actions.
