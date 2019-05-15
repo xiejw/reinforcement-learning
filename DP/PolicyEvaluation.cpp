@@ -12,12 +12,13 @@
 
 #include "Lib/GridWorldModel.h"
 #include "Lib/GridWorldPolicy.h"
-#include "Lib/GridWorldValueFunctionPrinter.h"
+#include "Lib/GridWorldPrinter.h"
 #include "Lib/PolicyEvaluator.h"
 #include "Lib/ValueFunction.h"
 
 // The width and height of grid.
 constexpr int kGridSize = 4;
+constexpr float kThreshold = 0.0001;
 
 int main() {
   std::unique_ptr<DP::ValueFunction> value_function{
@@ -26,13 +27,13 @@ int main() {
   GridWorld::Model model(/*grid_size=*/kGridSize);
   GridWorld::RandomPolicy policy;
 
-  DP::PolicyEvaluator evaluator{model, /*inPlace=*/false};
+  DP::PolicyEvaluator evaluator{model, /*inPlace=*/true};
 
   GridWorld::PrintValues(*value_function, kGridSize);
   bool stop = false;
   for (int k = 0; !stop; ++k) {
     std::cout << "\nStage " << k << ":\n";
-    if (evaluator.Update(policy, value_function) < 0.005) stop = true;
+    if (evaluator.Update(policy, value_function) < kThreshold) stop = true;
     GridWorld::PrintValues(*value_function, kGridSize);
   }
   return 0;

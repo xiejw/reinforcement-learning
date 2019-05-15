@@ -18,10 +18,10 @@
 //     -2     -3     -2     -1
 //     -3     -2     -1      0
 // Optimal Policy
-//    up  left  left  down
+//   n/a  left  left  down
 //    up    up    up  down
 //    up    up  down  down
-//    up right right  down
+//    up right right   n/a
 //
 // The result depends on the action search order.
 #include <iostream>
@@ -29,13 +29,13 @@
 
 #include "Lib/GridWorldModel.h"
 #include "Lib/GridWorldPolicy.h"
-#include "Lib/GridWorldValueFunctionPrinter.h"
+#include "Lib/GridWorldPrinter.h"
 #include "Lib/PolicyEvaluator.h"
 #include "Lib/ValueFunction.h"
 
 // The width and height of grid.
 constexpr int kGridSize = 4;
-constexpr float kThreshold = 0.005;
+constexpr float kThreshold = 0.0001;
 
 int main() {
   GridWorld::Model model(/*grid_size=*/kGridSize);
