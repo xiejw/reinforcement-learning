@@ -22,4 +22,4 @@ dealer.
 
 This environment corresponds to the version of the blackjack problem described
 in Example 5.1 in [Reinforcement Learning: An Introduction by Sutton and Barto
-(1998)](https://webdocs.cs.ualberta.ca/~sutton/book/the-book.html).
+(1998)](http://incompleteideas.net/book/first/the-book.html).
