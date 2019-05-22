@@ -1,4 +1,4 @@
-#include "Lib/GamblerProblemModel.h"
+#include "Lib/GamblerProblem/Model.h"
 
 #include <cassert>
 

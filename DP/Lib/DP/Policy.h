@@ -1,5 +1,5 @@
-#ifndef POLICY
-#define POLICY
+#ifndef DP_POLICY
+#define DP_POLICY
 
 #include <memory>
 #include <utility>

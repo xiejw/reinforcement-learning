@@ -1,11 +1,11 @@
-#ifndef MODEL
-#define MODEL
+#ifndef DP_MODEL
+#define DP_MODEL
 
 #include <memory>
 #include <tuple>
 #include <vector>
 
-#include "Lib/Policy.h"
+#include "Lib/DP/Policy.h"
 
 namespace DP {
 

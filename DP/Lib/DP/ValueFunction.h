@@ -1,5 +1,5 @@
-#ifndef VALUE_FUNCTION
-#define VALUE_FUNCTION
+#ifndef DP_VALUEFUNCTION
+#define DP_VALUEFUNCTION
 
 #include <chrono>
 #include <memory>

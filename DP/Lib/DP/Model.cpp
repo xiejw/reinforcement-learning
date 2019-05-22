@@ -1,26 +1,25 @@
-#include "Lib/GridWorldModel.h"
+#include "Lib/DP/Model.h"
 
-#include "Lib/GridWorldPolicy.h"
 #include "Lib/Support/Error.h"
 
-namespace GridWorld {
+namespace DP {
 
-std::vector<std::tuple<DP::Reward, DP::Probability, DP::State>>
-Model::Transition(DP::State state, DP::Action action) const {
-  std::vector<std::tuple<DP::Reward, DP::Probability, DP::State>> returns;
+std::vector<std::tuple<Reward, Probability, State>> GridWorldModel::Transition(
+    State state, Action action) const {
+  std::vector<std::tuple<Reward, Probability, State>> returns;
   int x = state / grid_size_, y = state % grid_size_;
 
   switch (action) {
-    case Action::up:
+    case GridWorldAction::up:
       if (x > 0) x -= 1;
       break;
-    case Action::down:
+    case GridWorldAction::down:
       if (x < grid_size_ - 1) x += 1;
       break;
-    case Action::left:
+    case GridWorldAction::left:
       if (y > 0) y -= 1;
       break;
-    case Action::right:
+    case GridWorldAction::right:
       if (y < grid_size_ - 1) y += 1;
       break;
     default:
@@ -30,8 +29,8 @@ Model::Transition(DP::State state, DP::Action action) const {
   return returns;
 }
 
-bool Model::IsTerminalState(DP::State state) const {
+bool GridWorldModel::IsTerminalState(State state) const {
   return (state == 0) || (state == grid_size_ * grid_size_ - 1);
 }
 
-}  // namespace GridWorld
+}  // namespace DP

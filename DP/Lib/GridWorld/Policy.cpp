@@ -1,4 +1,4 @@
-#include "Lib/GridWorldPolicy.h"
+#include "Lib/GridWorld/Policy.h"
 
 #include <utility>
 #include <vector>

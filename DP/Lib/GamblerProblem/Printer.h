@@ -5,8 +5,8 @@
 #include <iomanip>
 #include <iostream>
 
-#include "Lib/Policy.h"
-#include "Lib/PolicyEvaluator.h"
+#include "Lib/DP/Policy.h"
+#include "Lib/DP/PolicyEvaluator.h"
 #include "Lib/Support/Error.h"
 
 namespace GamblerProblem {

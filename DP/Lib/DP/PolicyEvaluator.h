@@ -1,13 +1,13 @@
-#ifndef POLICYEVALUATOR
-#define POLICYEVALUATOR
+#ifndef DP_POLICYEVALUATOR
+#define DP_POLICYEVALUATOR
 
 #include <memory>
 #include <utility>
 #include <vector>
 
-#include "Lib/Model.h"
-#include "Lib/Policy.h"
-#include "Lib/ValueFunction.h"
+#include "Lib/DP/Model.h"
+#include "Lib/DP/Policy.h"
+#include "Lib/DP/ValueFunction.h"
 
 namespace DP {
 

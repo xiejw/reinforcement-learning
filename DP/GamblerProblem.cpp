@@ -15,12 +15,12 @@
 #include <iostream>
 #include <memory>
 
-#include "Lib/GamblerProblemModel.h"
-#include "Lib/GamblerProblemPolicy.h"
-#include "Lib/GamblerProblemPrinter.h"
-#include "Lib/GreedyPolicy.h"
-#include "Lib/PolicyEvaluator.h"
-#include "Lib/ValueFunction.h"
+#include "Lib/DP/GreedyPolicy.h"
+#include "Lib/DP/PolicyEvaluator.h"
+#include "Lib/DP/ValueFunction.h"
+#include "Lib/GamblerProblem/Model.h"
+#include "Lib/GamblerProblem/Policy.h"
+#include "Lib/GamblerProblem/Printer.h"
 
 constexpr int kMaxValue = 100;
 constexpr double kThreshold = 0.0001;

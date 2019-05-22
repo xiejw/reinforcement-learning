@@ -1,11 +1,11 @@
-#ifndef GRIDWORLD_VALUEFUNCTIONPRINTER
-#define GRIDWORLD_VALUEFUNCTIONPRINTER
+#ifndef GRIDWORLD_PRINTER
+#define GRIDWORLD_PRINTER
 
 #include <iomanip>
 #include <iostream>
 
-#include "Lib/GridWorldPolicy.h"
-#include "Lib/PolicyEvaluator.h"
+#include "Lib/DP/PolicyEvaluator.h"
+#include "Lib/GridWorld/Policy.h"
 #include "Lib/Support/Error.h"
 
 namespace GridWorld {

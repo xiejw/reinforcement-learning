@@ -1,10 +1,10 @@
-#ifndef GRIDWORLDPOLICY
-#define GRIDWORLDPOLICY
+#ifndef GRIDWORLD_POLICY
+#define GRIDWORLD_POLICY
 
 #include <utility>
 #include <vector>
 
-#include "Lib/Policy.h"
+#include "Lib/DP/Policy.h"
 
 namespace GridWorld {
 

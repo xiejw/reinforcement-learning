@@ -1,4 +1,4 @@
-#include "Lib/GamblerProblemPolicy.h"
+#include "Lib/GamblerProblem/Policy.h"
 
 #include <algorithm>
 #include <cassert>

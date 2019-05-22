@@ -1,13 +1,13 @@
-#ifndef GRIDWORLDMODEL
-#define GRIDWORLDMODEL
+#ifndef GRIDWORLD_MODEL
+#define GRIDWORLD_MODEL
 
 #include <memory>
 #include <tuple>
 #include <vector>
 
-#include "Lib/GridWorldPolicy.h"
-#include "Lib/Model.h"
-#include "Lib/Policy.h"
+#include "Lib/DP/Model.h"
+#include "Lib/DP/Policy.h"
+#include "Lib/GridWorld/Policy.h"
 
 namespace GridWorld {
 

@@ -10,11 +10,11 @@
 // `inPlace==true` converges faster.
 #include <memory>
 
-#include "Lib/GridWorldModel.h"
-#include "Lib/GridWorldPolicy.h"
-#include "Lib/GridWorldPrinter.h"
-#include "Lib/PolicyEvaluator.h"
-#include "Lib/ValueFunction.h"
+#include "Lib/DP/PolicyEvaluator.h"
+#include "Lib/DP/ValueFunction.h"
+#include "Lib/GridWorld/Model.h"
+#include "Lib/GridWorld/Policy.h"
+#include "Lib/GridWorld/Printer.h"
 
 // The width and height of grid.
 constexpr int kGridSize = 4;

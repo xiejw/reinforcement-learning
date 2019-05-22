@@ -5,8 +5,8 @@
 #include <tuple>
 #include <vector>
 
-#include "Lib/Model.h"
-#include "Lib/Policy.h"
+#include "Lib/DP/Model.h"
+#include "Lib/DP/Policy.h"
 
 namespace GamblerProblem {
 

@@ -1,27 +1,27 @@
-default: fmt PolicyEvaluation PolicyIteration ValueIteration GamblerProblem
+default: PolicyEvaluation PolicyIteration ValueIteration GamblerProblem
 
 include ../Makefile.template
 
 # {{{1 Object files.
 
-POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorldPolicy.o
-POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorldModel.o
-POLICY_EVALUATION_LIBS += ${BIN}/Lib/PolicyEvaluator.o
+POLICY_EVALUATION_LIBS += ${BIN}/Lib/DP/PolicyEvaluator.o
+POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorld/Model.o
+POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorld/Policy.o
 
-POLICY_ITERATION_LIBS += ${BIN}/Lib/GreedyPolicy.o
-POLICY_ITERATION_LIBS += ${BIN}/Lib/GridWorldPolicy.o
-POLICY_ITERATION_LIBS += ${BIN}/Lib/GridWorldModel.o
-POLICY_ITERATION_LIBS += ${BIN}/Lib/PolicyEvaluator.o
+POLICY_ITERATION_LIBS += ${BIN}/Lib/DP/GreedyPolicy.o
+POLICY_ITERATION_LIBS += ${BIN}/Lib/DP/PolicyEvaluator.o
+POLICY_ITERATION_LIBS += ${BIN}/Lib/GridWorld/Model.o
+POLICY_ITERATION_LIBS += ${BIN}/Lib/GridWorld/Policy.o
 
-VALUE_ITERATION_LIBS += ${BIN}/Lib/GreedyPolicy.o
-VALUE_ITERATION_LIBS += ${BIN}/Lib/GridWorldPolicy.o
-VALUE_ITERATION_LIBS += ${BIN}/Lib/GridWorldModel.o
-VALUE_ITERATION_LIBS += ${BIN}/Lib/PolicyEvaluator.o
+VALUE_ITERATION_LIBS += ${BIN}/Lib/DP/GreedyPolicy.o
+VALUE_ITERATION_LIBS += ${BIN}/Lib/DP/PolicyEvaluator.o
+VALUE_ITERATION_LIBS += ${BIN}/Lib/GridWorld/Model.o
+VALUE_ITERATION_LIBS += ${BIN}/Lib/GridWorld/Policy.o
 
-GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/GreedyPolicy.o
-GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/GamblerProblemPolicy.o
-GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/GamblerProblemModel.o
-GAMBLER_PROBLEM__LIBS += ${BIN}/Lib/PolicyEvaluator.o
+GAMBLER_PROBLEM_LIBS += ${BIN}/Lib/DP/GreedyPolicy.o
+GAMBLER_PROBLEM_LIBS += ${BIN}/Lib/DP/PolicyEvaluator.o
+GAMBLER_PROBLEM_LIBS += ${BIN}/Lib/GamblerProblem/Model.o
+GAMBLER_PROBLEM_LIBS += ${BIN}/Lib/GamblerProblem/Policy.o
 
 # {{{1 PolicyEvaluation
 .PHONY: PolicyEvaluation
@@ -52,6 +52,6 @@ ${BIN}/ValueIteration: ${BIN}/ValueIteration.o ${VALUE_ITERATION_LIBS}
 GamblerProblem: ${BIN} ${BIN}/GamblerProblem
 
 
-${BIN}/GamblerProblem: ${BIN}/GamblerProblem.o ${GAMBLER_PROBLEM__LIBS}
+${BIN}/GamblerProblem: ${BIN}/GamblerProblem.o ${GAMBLER_PROBLEM_LIBS}
 	${CXX} -o $@ $^
 
