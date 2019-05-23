@@ -4,3 +4,6 @@
 
 # CXX Output
 build
+
+# Swift Output
+.build
