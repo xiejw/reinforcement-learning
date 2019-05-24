@@ -1,1 +1,1 @@
-public typealias FloatType = Float
+public typealias FloatType = Double

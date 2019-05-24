@@ -19,11 +19,13 @@ public class ValueFunction {
 }
 
 extension ValueFunction {
-    subscript(state: State) -> FloatType {
+    public subscript(state: State) -> FloatType {
         get {
+            assert(state.index >= 0 && state.index < stateCount)
             return values[state.index]
         }
         set(newValue) {
+            assert(state.index >= 0 && state.index < stateCount)
             values[state.index] = newValue
         }
     }

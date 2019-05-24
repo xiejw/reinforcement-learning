@@ -8,7 +8,7 @@ public class PolicyEvaluator {
         self.inPlaceUpdate = inPlaceUpdate
     }
 
-    func Update(_ valueFunction: ValueFunction, using policy: Policy) -> FloatType {
+    public func Update(_ valueFunction: ValueFunction, using policy: Policy) -> FloatType {
         var maxDelta: FloatType = 0
 
         for state in model.states {
@@ -25,6 +25,7 @@ public class PolicyEvaluator {
             }
 
             maxDelta = max(maxDelta, abs(newValue - valueFunction[state]))
+            valueFunction[state] = newValue
         }
         return maxDelta
     }
