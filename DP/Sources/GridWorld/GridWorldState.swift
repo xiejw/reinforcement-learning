@@ -1,11 +1,11 @@
 import DynamicProgramming
 
-struct GridWorldState: State {
+public struct GridWorldState: State {
     private let stateIndex: Int
 
-    init(index: Int) {
+    public init(index: Int) {
         self.stateIndex = index
     }
 
-    var index: Int { return stateIndex }
+    public var index: Int { return stateIndex }
 }

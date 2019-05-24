@@ -4,11 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "DP",
-    dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-    ],
+    name: "DynamicProgramming",
     targets: [
         .target(
             name: "DynamicProgramming",
@@ -23,8 +19,8 @@ let package = Package(
             dependencies: ["DynamicProgramming", "GridWorld"]
         ),
         .testTarget(
-            name: "DPTests",
-            dependencies: ["DynamicProgramming"]
+            name: "PolicyEvaluationTests",
+            dependencies: ["DynamicProgramming", "GridWorld"]
         ),
     ]
 )

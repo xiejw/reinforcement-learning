@@ -1,7 +1,7 @@
 import XCTest
 
-import DPTests
+import PolicyEvaluationTests
 
 var tests = [XCTestCaseEntry]()
-tests += DPTests.allTests()
+tests += PolicyEvaluationTests.allTests()
 XCTMain(tests)

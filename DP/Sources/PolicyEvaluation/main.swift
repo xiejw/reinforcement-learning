@@ -19,5 +19,3 @@ repeat {
     valueFunction.PrintDebugString(context: context)
     print("")
 } while maxDelta > 0.0001
-
-print("hello policy")
