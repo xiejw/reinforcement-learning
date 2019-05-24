@@ -8,17 +8,13 @@
 namespace MC {
 
 using Reward = double;
+using EndOfEpisode = bool;
+using Action = int;
 
 class Envinronment {
  public:
-  virtual std::tuple<Reward, bool, std::unique_ptr<State>> Next(
+  virtual std::tuple<Reward, EndOfEpisode, std::unique_ptr<State>> Next(
       State state, Action action) const = 0;
-
-  virtual int StateSpaseSizt() const = 0;
-
-  virtual const std::vector<Action> FeasibleActions(State state) const = 0;
-
-  virtual bool IsTerminalState(State state) const = 0;
 };
 
 }  // namespace MC

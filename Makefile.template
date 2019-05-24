@@ -1,7 +1,7 @@
 # {{{1 Configuration.
 BIN = build
 CXX = clang++
-CLANG_FORMAT = clang-format -i -style=Google
+FORMATTER = docker run --rm -ti -v `pwd`:/source xiejw/clang-format /clang-format.sh
 
 CXXFLAGS += -Wall -std=c++14 -I.
 
@@ -25,4 +25,4 @@ clean:
 	rm -rf ${BIN}
 
 fmt:
-	find . -type f | grep -E "(.h|.cpp)$$" | xargs ${CLANG_FORMAT} ;
+	${FORMATTER} "(.h|.cpp)$$"
