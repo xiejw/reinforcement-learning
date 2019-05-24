@@ -1,6 +1,5 @@
 /// Evaluates the state values for the model.
 public class PolicyEvaluator {
-
     private let model: Model
     private let inPlaceUpdate: Bool
 

@@ -6,8 +6,8 @@ public class ValueFunction {
     private var values: [FloatType]
 
     private enum Mode {
-      case direct
-      case buffered
+        case direct
+        case buffered
     }
 
     public init(stateCount: Int) {
@@ -15,7 +15,7 @@ public class ValueFunction {
         values = Array(repeating: 0.0, count: stateCount)
     }
 
-    var count: Int { get { return values.count }}
+    var count: Int { return values.count }
 }
 
 extension ValueFunction {
