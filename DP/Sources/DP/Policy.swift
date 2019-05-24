@@ -1,5 +1,3 @@
-public enum Action {}
-
 protocol Policy {
-    func feasibleActions(for stateIndex: Int) -> [(FloatType, Action)]
+    func feasibleActions(for state: State) -> [(FloatType, Action)]
 }

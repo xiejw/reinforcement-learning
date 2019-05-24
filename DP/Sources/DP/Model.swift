@@ -1,5 +1,3 @@
-typealias State = Int
-
 public struct Transition {
     let probability: FloatType
     let reward: FloatType
@@ -7,6 +5,7 @@ public struct Transition {
 }
 
 public protocol Model {
-    func isTerminal(for stateIndex: Int) -> Bool
-    func transition(from stateIndex: Int, after action: Action) -> [Transition]
+    func isTerminal(for state: State) -> Bool
+    func transition(from state: State, after action: Action) -> [Transition]
+    var states: [State] { get }
 }

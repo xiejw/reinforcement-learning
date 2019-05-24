@@ -1,5 +1,3 @@
-typealias FloatType = Float
-
 /// ValueFunction represents the value estimations for each state.
 ///
 /// The state is accessed via the index of the state.
@@ -17,16 +15,16 @@ public class ValueFunction {
         values = Array(repeating: 0.0, count: stateCount)
     }
 
-    var count: Int { get { values.count }}
+    var count: Int { get { return values.count }}
 }
 
 extension ValueFunction {
-    subscript(index: Int) -> FloatType {
+    subscript(state: State) -> FloatType {
         get {
-            return values[index]
+            return values[state.index]
         }
         set(newValue) {
-            values[index] = newValue
+            values[state.index] = newValue
         }
     }
 }
