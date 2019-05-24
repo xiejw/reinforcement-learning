@@ -9,18 +9,15 @@ let policy = GridWorldRandomPolicy()
 let valueFunction = ValueFunction(stateCount: context.stateCount)
 let evaluator = PolicyEvaluator(model: model)
 
-var k = 0
-while true {
-    let maxDelta = evaluator.Update(valueFunction, using: policy)
-    k += 1
+var maxDelta: FloatType
+var iteration = 0
+repeat {
+    iteration += 1
+    maxDelta = evaluator.Evaluation(valueFunction, using: policy)
 
-    print("Stage \(k): maxDetal \(maxDelta)")
+    print("Iteration \(iteration): maxDelta \(maxDelta)")
     valueFunction.PrintDebugString(context: context)
     print("")
-
-    if maxDelta < 0.0001 {
-        break
-    }
-}
+} while maxDelta > 0.0001
 
 print("hello policy")
