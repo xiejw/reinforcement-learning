@@ -11,6 +11,15 @@ public class PolicyEvaluator {
     public func Evaluation(_ valueFunction: ValueFunction, using policy: Policy) -> FloatType {
         var maxDelta: FloatType = 0
 
+        if !inPlaceUpdate {
+            valueFunction.BeginWriteOnBufferedData()
+        }
+        defer {
+            if !inPlaceUpdate {
+                valueFunction.EndWriteOnBufferedData()
+            }
+        }
+
         for state in model.states {
             if model.isTerminal(for: state) {
                 continue

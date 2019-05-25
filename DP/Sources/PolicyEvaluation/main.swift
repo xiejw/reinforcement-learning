@@ -7,7 +7,7 @@ let model = GridWorldModel(context: context)
 let policy = GridWorldRandomPolicy()
 
 let valueFunction = ValueFunction(stateCount: context.stateCount)
-let evaluator = PolicyEvaluator(model: model)
+let evaluator = PolicyEvaluator(model: model, inPlaceUpdate: true)
 
 var maxDelta: FloatType
 var iteration = 0

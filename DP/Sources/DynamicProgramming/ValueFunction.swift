@@ -4,11 +4,14 @@
 public class ValueFunction {
     private let stateCount: Int
     private var values: [FloatType]
+    private var temporaryValuesCopy: [FloatType] = []
 
     private enum Mode {
         case direct
         case buffered
     }
+
+    private var mode = Mode.direct
 
     public init(stateCount: Int) {
         self.stateCount = stateCount
@@ -19,6 +22,19 @@ public class ValueFunction {
 }
 
 extension ValueFunction {
+    func BeginWriteOnBufferedData() {
+        mode = .buffered
+        temporaryValuesCopy = values
+    }
+
+    func EndWriteOnBufferedData() {
+        mode = .direct
+        // If we can adjust the ownership, this copy can be saved so we just swap the pointers.
+        values = temporaryValuesCopy
+    }
+}
+
+extension ValueFunction {
     public subscript(state: State) -> FloatType {
         get {
             assert(state.index >= 0 && state.index < stateCount)
@@ -26,7 +42,10 @@ extension ValueFunction {
         }
         set(newValue) {
             assert(state.index >= 0 && state.index < stateCount)
-            values[state.index] = newValue
+            switch mode {
+            case .direct: values[state.index] = newValue
+            case .buffered: temporaryValuesCopy[state.index] = newValue
+            }
         }
     }
 }
