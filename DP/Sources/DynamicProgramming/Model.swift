@@ -1,3 +1,4 @@
+/// Represents a transition after taking an action.
 public struct Transition {
     let probability: FloatType
     let reward: FloatType
@@ -10,8 +11,16 @@ public struct Transition {
     }
 }
 
+/// The model of the environment.
 public protocol Model {
+    /// Returns true if the state is a terminal state.
     func isTerminal(for state: State) -> Bool
+
+    /// Returns all possible transitions.
+    ///
+    /// The summation of probabilities of all transitions must be 1 forming a valid distribution.
     func transition(from state: State, after action: Action) -> [Transition]
+
+    /// Returns all possible states in the model.
     var states: [State] { get }
 }
