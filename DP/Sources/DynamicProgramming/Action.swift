@@ -4,10 +4,10 @@ public protocol Action {
     var value: Int { get }
 }
 
-enum SpecialAction: Int, Action {
+public enum SpecialAction: Int, Action {
     case notAvailable = -1
 
-    var value: Int {
+    public var value: Int {
         return self.rawValue
     }
 }

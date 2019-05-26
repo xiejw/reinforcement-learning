@@ -31,6 +31,7 @@ while true {
 
     if !policy.Adapt(from: valueFunction) {
         print("Policy iteration converged.")
+        print(policy.debugString(context, model: model))
         break
     }
 }
