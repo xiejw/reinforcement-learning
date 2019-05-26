@@ -23,4 +23,7 @@ public protocol Model {
 
     /// Returns all possible states in the model.
     var states: [State] { get }
+
+    /// Returns all feasible actions for the state.
+    func feasibleActions(for state: State) -> [Action]
 }

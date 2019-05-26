@@ -7,16 +7,20 @@ let package = Package(
     name: "DynamicProgramming",
     targets: [
         .target(
+            name: "PolicyEvaluation",
+            dependencies: ["DynamicProgramming", "GridWorld"]
+        ),
+        .target(
+            name: "PolicyIteration",
+            dependencies: ["DynamicProgramming", "GridWorld"]
+        ),
+        .target(
             name: "DynamicProgramming",
             dependencies: []
         ),
         .target(
             name: "GridWorld",
             dependencies: ["DynamicProgramming"]
-        ),
-        .target(
-            name: "PolicyEvaluation",
-            dependencies: ["DynamicProgramming", "GridWorld"]
         ),
         .testTarget(
             name: "PolicyEvaluationTests",

@@ -16,6 +16,5 @@ repeat {
     maxDelta = evaluator.Evaluation(valueFunction, using: policy)
 
     print("Iteration \(iteration): maxDelta \(maxDelta)")
-    valueFunction.PrintDebugString(context: context)
-    print("")
+    print("\(valueFunction.debugString(context))\n")
 } while maxDelta > 0.0001
