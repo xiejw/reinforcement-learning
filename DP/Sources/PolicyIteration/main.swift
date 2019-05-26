@@ -27,11 +27,11 @@ while true {
     } while maxDelta > 0.0001
 
     print("Iteration \(iteration): maxDelta \(maxDelta)")
-    print(valueFunction.debugString(context))
+    print(valueFunction.debugString(with: context))
 
     if !policy.Adapt(from: valueFunction) {
         print("Policy iteration converged.")
-        print(policy.debugString(context, model: model))
+        print(policy.debugString(with: context, for: model))
         break
     }
 }

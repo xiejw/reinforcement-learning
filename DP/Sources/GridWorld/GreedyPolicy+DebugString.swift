@@ -2,7 +2,7 @@ import DynamicProgramming
 import Foundation
 
 extension GreedyPolicy {
-    public func debugString(_ context: Context, model: Model) -> String {
+    public func debugString(with context: Context, for model: Model) -> String {
         var output = ""
         let gridSize = context.gridSize
         assert(model.states.count == gridSize * gridSize)

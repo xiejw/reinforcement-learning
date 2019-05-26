@@ -2,7 +2,7 @@ import DynamicProgramming
 import Foundation
 
 extension ValueFunction {
-    public func debugString(_ context: Context) -> String {
+    public func debugString(with context: Context) -> String {
         var output = ""
         let gridSize = context.gridSize
         for i in 0 ..< gridSize {
