@@ -16,6 +16,10 @@ public class GreedyPolicy: Policy {
     }
 
     public func Adapt(from valueFunction: ValueFunction) -> Bool {
+        if !initialized {
+            initializeActionsByRandomSelection()
+        }
+
         let allStates = model.states
         let oldActionsCopy = actions
         assert(oldActionsCopy.count == allStates.count)

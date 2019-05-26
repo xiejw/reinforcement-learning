@@ -15,6 +15,10 @@ let package = Package(
             dependencies: ["DynamicProgramming", "GridWorld"]
         ),
         .target(
+            name: "ValueIteration",
+            dependencies: ["DynamicProgramming", "GridWorld"]
+        ),
+        .target(
             name: "DynamicProgramming",
             dependencies: []
         ),
@@ -28,6 +32,10 @@ let package = Package(
         ),
         .testTarget(
             name: "PolicyIterationTests",
+            dependencies: ["DynamicProgramming", "GridWorld"]
+        ),
+        .testTarget(
+            name: "ValueIterationTests",
             dependencies: ["DynamicProgramming", "GridWorld"]
         ),
     ]
