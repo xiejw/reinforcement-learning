@@ -26,5 +26,9 @@ let package = Package(
             name: "PolicyEvaluationTests",
             dependencies: ["DynamicProgramming", "GridWorld"]
         ),
+        .testTarget(
+            name: "PolicyIterationTests",
+            dependencies: ["DynamicProgramming", "GridWorld"]
+        ),
     ]
 )
