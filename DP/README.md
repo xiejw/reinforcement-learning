@@ -33,11 +33,11 @@
 
 ### Exercises
 
-- Implement Policy Evaluation in Python (Gridworld)
-  - [Exercise](PolicyEvaluation.cpp)
+- Implement Policy Evaluation in Swift (Gridworld)
+  - [Exercise](Sources/PolicyEvaluation/main.swift)
 
-- Implement Policy Iteration in Python (Gridworld)
-  - [Exercise](PolicyIteration.cpp)
+- Implement Policy Iteration in Swift (Gridworld)
+  - [Exercise](Sources/PolicyIteration/main.swift)
 
 - Implement Value Iteration in Python (Gridworld)
   - [Exercise](ValueIteration.cpp)

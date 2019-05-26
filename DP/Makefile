@@ -2,7 +2,7 @@ FORMATTER=docker run --rm -ti -v `pwd`:/source xiejw/swift-format /swift-format.
 
 default: test
 
-.PHONY: policy_evaluation
+.PHONY: policy_evaluation, policy_iteration
 
 policy_evaluation:
 	swift run PolicyEvaluation
