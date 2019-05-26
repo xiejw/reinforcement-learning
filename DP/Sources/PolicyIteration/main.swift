@@ -16,8 +16,7 @@ while true {
     let valueFunction = ValueFunction(stateCount: context.stateCount)
 
     // Inner loop: Iterate until ValueFunction is converged.
-    var innerLoopIteration = 0
-    var maxDelta: FloatType
+    var innerLoopIteration = 0, maxDelta: FloatType
     repeat {
         innerLoopIteration += 1
         maxDelta = evaluator.Evaluation(valueFunction, using: policy)
@@ -28,12 +27,10 @@ while true {
     } while maxDelta > 0.0001
 
     print("Iteration \(iteration): maxDelta \(maxDelta)")
-    print("\(valueFunction.debugString(context))\n")
+    print(valueFunction.debugString(context))
 
     if !policy.Adapt(from: valueFunction) {
         print("Policy iteration converged.")
         break
     }
-    // valueFunction.PrintDebugString(context: context)
-    // print("")
 }

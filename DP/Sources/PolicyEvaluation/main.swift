@@ -9,6 +9,7 @@ let policy = GridWorldRandomPolicy()
 let valueFunction = ValueFunction(stateCount: context.stateCount)
 let evaluator = PolicyEvaluator(model: model, inPlaceUpdate: true)
 
+// Iterate until ValueFunction is converged.
 var maxDelta: FloatType
 var iteration = 0
 repeat {
@@ -16,5 +17,5 @@ repeat {
     maxDelta = evaluator.Evaluation(valueFunction, using: policy)
 
     print("Iteration \(iteration): maxDelta \(maxDelta)")
-    print("\(valueFunction.debugString(context))\n")
+    print(valueFunction.debugString(context))
 } while maxDelta > 0.0001
