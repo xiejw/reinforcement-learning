@@ -18,10 +18,10 @@ let package = Package(
             name: "ValueIteration",
             dependencies: ["DynamicProgramming", "GridWorld"]
         ),
-        // .target(
-        //     name: "GamblerProblem",
-        //     dependencies: ["DynamicProgramming", "GamblerProblemLibrary"]
-        // ),
+        .target(
+            name: "GamblerProblem",
+            dependencies: ["DynamicProgramming", "GamblerProblemLibrary"]
+        ),
         .target(
             name: "DynamicProgramming",
             dependencies: []
