@@ -1,25 +1,36 @@
 public class GreedyPolicy: Policy {
     private let model: Model
-    private var actions: [Action] = []
     private var initialized = false
 
     public init(model: Model) {
         self.model = model
     }
 
-    public func feasibleActions(for state: State) -> [(probability: FloatType, action: Action)] {
-        if !initialized {
-            initializeActionsByRandomSelection()
+    private lazy var actions: [Action] = {
+        let allStates = model.states
+        var arbitraryActions: [Action] = Array(
+            repeating: SpecialAction.notAvailable,
+            count: allStates.count
+        )
+
+        for state in allStates {
+            guard !model.isTerminal(for: state) else {
+                continue
+            }
+
+            let modelFeasibleActions = model.feasibleActions(for: state)
+            precondition(modelFeasibleActions.count > 0)
+            arbitraryActions[state.index] = modelFeasibleActions[0]
         }
+        return arbitraryActions
+    }()
+
+    public func feasibleActions(for state: State) -> [(probability: FloatType, action: Action)] {
         assert(state.index >= 0 && state.index < actions.count)
         return [(probability: 1.0, actions[state.index])]
     }
 
     public func Adapt(from valueFunction: ValueFunction) -> Bool {
-        if !initialized {
-            initializeActionsByRandomSelection()
-        }
-
         let allStates = model.states
         let oldActionsCopy = actions
         assert(oldActionsCopy.count == allStates.count)
@@ -52,24 +63,5 @@ public class GreedyPolicy: Policy {
         }
 
         return changed
-    }
-}
-
-extension GreedyPolicy {
-    private func initializeActionsByRandomSelection() {
-        assert(actions.isEmpty)
-        let allStates = model.states
-        actions = Array(repeating: SpecialAction.notAvailable, count: allStates.count)
-
-        for state in allStates {
-            guard !model.isTerminal(for: state) else {
-                continue
-            }
-
-            let feasibleActions = model.feasibleActions(for: state)
-            precondition(feasibleActions.count > 0)
-            actions[state.index] = feasibleActions[0]
-        }
-        initialized = true
     }
 }
