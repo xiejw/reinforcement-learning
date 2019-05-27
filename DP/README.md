@@ -43,4 +43,4 @@
   - [Exercise](Sources/ValueIteration/main.swift)
 
 - Implement Gambler's Problem
-  - [Exercise](GamblersProblem.cpp)
+  - [Exercise](Sources/GamblerProblem/main.swift)

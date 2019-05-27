@@ -15,11 +15,10 @@ while true {
     iteration += 1
 
     print("Iteration \(iteration)")
-    // print(valueFunction.debugString(with: context))
 
     _ = policy.Adapt(from: valueFunction)
     print("New policy:")
-    // print(policy.debugString(with: context, for: model))
+    print(policy.debugString(with: context, for: model))
 
     maxDelta = evaluator.Evaluation(valueFunction, using: policy)
     if maxDelta < 0.0001 {
