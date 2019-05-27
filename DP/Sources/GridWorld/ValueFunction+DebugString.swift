@@ -7,8 +7,7 @@ extension ValueFunction {
         let gridSize = context.gridSize
         for i in 0 ..< gridSize {
             for j in 0 ..< gridSize {
-                output.append(
-                    String(format: "%6.2f ", self[GridWorldState(index: i * gridSize + j)]))
+                output.append(String(format: "%6.2f ", self[State(index: i * gridSize + j)]))
             }
             output.append("\n")
         }

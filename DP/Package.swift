@@ -19,11 +19,19 @@ let package = Package(
             dependencies: ["DynamicProgramming", "GridWorld"]
         ),
         .target(
+            name: "GamblerProblem",
+            dependencies: ["DynamicProgramming", "GamblerProblemLibrary"]
+        ),
+        .target(
             name: "DynamicProgramming",
             dependencies: []
         ),
         .target(
             name: "GridWorld",
+            dependencies: ["DynamicProgramming"]
+        ),
+        .target(
+            name: "GamblerProblemLibrary",
             dependencies: ["DynamicProgramming"]
         ),
         .testTarget(

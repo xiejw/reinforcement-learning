@@ -49,7 +49,7 @@ public class GridWorldModel: Model {
             Transition(
                 probability: 1.0,
                 reward: -1.0,
-                newState: GridWorldState(index: x * gridSize + y)
+                newState: State(index: x * gridSize + y)
             ),
         ]
     }
@@ -58,7 +58,7 @@ public class GridWorldModel: Model {
         var modelStates: [State] = []
         modelStates.reserveCapacity(context.stateCount)
         for i in 0 ..< context.stateCount {
-            modelStates.append(GridWorldState(index: i))
+            modelStates.append(State(index: i))
         }
         return modelStates
     }()

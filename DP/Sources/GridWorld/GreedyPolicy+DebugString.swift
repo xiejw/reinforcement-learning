@@ -9,9 +9,7 @@ extension GreedyPolicy {
 
         for i in 0 ..< gridSize {
             for j in 0 ..< gridSize {
-                let policyActions = feasibleActions(
-                    for: GridWorldState(index: i * gridSize + j)
-                )
+                let policyActions = feasibleActions(for: State(index: i * gridSize + j))
                 precondition(policyActions.count == 1)
                 let action = policyActions[0].action
 

@@ -33,7 +33,7 @@ class ValueIterationTests: XCTestCase {
         for i in 0 ..< stateCount {
             XCTAssertEqual(
                 expectedValues[i],
-                valueFunction[GridWorldState(index: i)],
+                valueFunction[State(index: i)],
                 accuracy: 0.01
             )
         }
