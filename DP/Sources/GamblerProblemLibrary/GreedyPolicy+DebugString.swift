@@ -13,15 +13,16 @@ extension GreedyPolicy {
             precondition(policyActions.count == 1)
             let action = policyActions[0].action
 
-            if let specialAction = action as? SpecialAction {
+            switch action {
+            case let specialAction as SpecialAction:
                 switch specialAction {
                 case .notAvailable: output.append("   n/a")
                 }
-            } else if let gamblerProblemAction = action as? GamblerProblemAction {
+            case let gamblerProblemAction as GamblerProblemAction:
                 let actionString = "\(gamblerProblemAction.value)"
                 output.append(String(repeating: " ", count: 6 - actionString.count))
                 output.append(actionString)
-            } else {
+            default:
                 fatalError("Unexpected action: \(action)")
             }
 
