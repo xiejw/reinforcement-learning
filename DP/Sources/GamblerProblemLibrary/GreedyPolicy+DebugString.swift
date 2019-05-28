@@ -4,7 +4,6 @@ import Foundation
 extension GreedyPolicy {
     public func debugString(
         with context: Context,
-        for _: Model,
         itemCountPerLine: Int = 25
     ) -> String {
         var output = ""

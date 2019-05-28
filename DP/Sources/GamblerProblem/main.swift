@@ -11,20 +11,15 @@ let valueFunction = ValueFunction(stateCount: context.stateCount)
 
 // Outer loop: Iterate until policy is stable.
 var iteration = 0, maxDelta: FloatType
-while true {
+repeat {
     iteration += 1
 
     print("Iteration \(iteration)")
 
     _ = policy.Adapt(from: valueFunction)
     print("New policy:")
-    print(policy.debugString(with: context, for: model))
+    print(policy.debugString(with: context))
 
     maxDelta = evaluator.Evaluation(valueFunction, using: policy)
-    if maxDelta < 0.0001 {
-        print("ValueFunction converged.")
-        break
-    }
-
     print("maxDelta \(maxDelta)")
-}
+} while maxDelta >= 0.0001

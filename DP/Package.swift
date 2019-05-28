@@ -46,5 +46,9 @@ let package = Package(
             name: "ValueIterationTests",
             dependencies: ["DynamicProgramming", "GridWorld"]
         ),
+        .testTarget(
+            name: "GamblerProblemTests",
+            dependencies: ["DynamicProgramming", "GamblerProblemLibrary"]
+        ),
     ]
 )
