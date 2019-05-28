@@ -20,23 +20,20 @@ let evaluator = PolicyEvaluator(model: model, inPlaceUpdate: false)
 let policy = GreedyPolicy(model: model)
 let valueFunction = ValueFunction(stateCount: context.stateCount)
 
-// Outer loop: Iterate until policy is stable.
+// Outer loop: Iterate until value function is stable.
 var iteration = 0, maxDelta: FloatType
-while true {
+repeat {
     iteration += 1
 
     print("Iteration \(iteration)")
     print(valueFunction.debugString(with: context))
 
     _ = policy.Adapt(from: valueFunction)
-    print("New policy:")
-    print(policy.debugString(with: context, for: model))
+    print("New policy:\n\(policy.debugString(with: context, for: model))")
 
     maxDelta = evaluator.Evaluation(valueFunction, using: policy)
-    if maxDelta < 0.0001 {
-        print("ValueFunction converged.")
-        break
-    }
-
     print("maxDelta \(maxDelta)")
-}
+
+} while maxDelta >= 0.0001
+
+print("ValueFunction converged.")
