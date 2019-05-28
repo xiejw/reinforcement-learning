@@ -21,21 +21,21 @@ class GamblerProblemTests: XCTestCase {
         } while maxDelta >= 0.0001
 
         let expectedPolicyOutput = """
-            1     2     3     4     5     6     7     8     9    10
-           11    12    12    11    10     9     8     7     6     5
-            4     3     2     1    25     1     2     3     4     5
-            6     7     8     9    10    11    12    12    11    10
-            9     8     7     6     5     4     3     2     1    50
-            1     2     3     4     5     6     7     8     9    10
-           11    12    12    11    10     9     8     7     6     5
-            4     3     2     1    25     1     2     3     4     5
-            6     7     8     9    10    11    12    12    11    10
-            9     8     7     6     5     4     3     2     1   n/a
+             1     2     3     4     5     6     7     8     9    10
+            11    12    12    11    10     9     8     7     6     5
+             4     3     2     1    25     1     2     3     4     5
+             6     7     8     9    10    11    12    12    11    10
+             9     8     7     6     5     4     3     2     1    50
+             1     2     3     4     5     6     7     8     9    10
+            11    12    12    11    10     9     8     7     6     5
+             4     3     2     1    25     1     2     3     4     5
+             6     7     8     9    10    11    12    12    11    10
+             9     8     7     6     5     4     3     2     1   n/a
 
-       """
+        """
         XCTAssertEqual(
-						expectedPolicyOutput,
-						policy.debugString(with: context, itemCountPerLine: 10)
+            expectedPolicyOutput,
+            policy.debugString(with: context, itemCountPerLine: 10)
         )
     }
 }

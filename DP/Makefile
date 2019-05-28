@@ -1,20 +1,26 @@
 FORMATTER=docker run --rm -ti -v `pwd`:/source xiejw/swift-format /swift-format.sh
 
-default: test
+default: clean test
 
-.PHONY: policy_evaluation, policy_iteration, value_iteration
+.PHONY: PolicyEvaluation, PolicyIteration, ValueIteration, GamblerProblem
 
-policy_evaluation:
+PolicyEvaluation:
 	swift run PolicyEvaluation
 
-policy_iteration:
+PolicyIteration:
 	swift run PolicyIteration
 
-value_iteration:
+ValueIteration:
 	swift run ValueIteration
+
+GamblerProblem:
+	swift run GamblerProblem
 
 test:
 	swift test
 
 fmt:
 	${FORMATTER} Sources Tests
+
+clean:
+	swift package clean
