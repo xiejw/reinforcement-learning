@@ -2,8 +2,5 @@
 *.swp
 *.swo
 
-# CXX Output
-build
-
 # Swift Output
 .build
