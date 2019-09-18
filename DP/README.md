@@ -35,11 +35,11 @@
 
 - Usage:
 
-        mkdir build
-        cd build
-        cmake ..
-        make PolicyEvaluation
-        make PolicyIteration
+      mkdir build
+      cd build
+      cmake ..
+      make PolicyEvaluation
+      make PolicyIteration
 
 - Implement Policy Evaluation in Python (Gridworld). See [Exercise](PolicyEvaluation.cpp).
 - Implement Policy Iteration in Python (Gridworld). See [Exercise](PolicyIteration.cpp).
