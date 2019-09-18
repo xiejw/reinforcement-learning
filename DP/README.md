@@ -38,10 +38,9 @@
       mkdir build
       cd build
       cmake ..
-      make PolicyEvaluation
-      make PolicyIteration
+      make
 
 - Implement Policy Evaluation in Python (Gridworld). See [Exercise](PolicyEvaluation.cpp).
 - Implement Policy Iteration in Python (Gridworld). See [Exercise](PolicyIteration.cpp).
 - Implement Value Iteration in Python (Gridworld). See [Exercise](ValueIteration.cpp).
-- Implement Gambler's Problem. See [Exercise](GamblersProblem.cpp).
+- Implement Gambler's Problem. See [Exercise](GamblerProblemDemo.cpp).

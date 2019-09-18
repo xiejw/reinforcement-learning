@@ -1,5 +1,4 @@
-add_library(
-  GridWorld
+add_library(GridWorld
   Printer.h
   Policy.h
   Model.h
