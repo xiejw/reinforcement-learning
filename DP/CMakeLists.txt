@@ -21,3 +21,6 @@ target_link_libraries (PolicyEvaluation DP)
 target_link_libraries (PolicyEvaluation GridWorld)
 
 # Executable for PolicyIteration
+add_executable (PolicyIteration PolicyIteration.cpp)
+target_link_libraries (PolicyIteration DP)
+target_link_libraries (PolicyIteration GridWorld)
