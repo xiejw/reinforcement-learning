@@ -33,19 +33,15 @@
 
 ### Exercises
 
-Usage:
+- Usage:
 
-    mkdir build
-    cd build
-    cmake ..
-    make PolicyEvaluation
-    make PolicyIteration
+        mkdir build
+        cd build
+        cmake ..
+        make PolicyEvaluation
+        make PolicyIteration
 
-- Implement Policy Evaluation in Python (Gridworld). See [Exercise](PolicyEvaluation.cpp)
-- Implement Policy Iteration in Python (Gridworld). See [Exercise](PolicyIteration.cpp)
-
-- Implement Value Iteration in Python (Gridworld)
-  - [Exercise](ValueIteration.cpp)
-
-- Implement Gambler's Problem
-  - [Exercise](GamblersProblem.cpp)
+- Implement Policy Evaluation in Python (Gridworld). See [Exercise](PolicyEvaluation.cpp).
+- Implement Policy Iteration in Python (Gridworld). See [Exercise](PolicyIteration.cpp).
+- Implement Value Iteration in Python (Gridworld). See [Exercise](ValueIteration.cpp).
+- Implement Gambler's Problem. See [Exercise](GamblersProblem.cpp).
