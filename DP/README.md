@@ -33,14 +33,14 @@
 
 ### Exercises
 
-- Implement Policy Evaluation in Swift (Gridworld)
-  - [Exercise](Sources/PolicyEvaluation/main.swift)
+- Implement Policy Evaluation in Python (Gridworld)
+  - [Exercise](PolicyEvaluation.cpp)
 
-- Implement Policy Iteration in Swift (Gridworld)
-  - [Exercise](Sources/PolicyIteration/main.swift)
+- Implement Policy Iteration in Python (Gridworld)
+  - [Exercise](PolicyIteration.cpp)
 
-- Implement Value Iteration in Swift (Gridworld)
-  - [Exercise](Sources/ValueIteration/main.swift)
+- Implement Value Iteration in Python (Gridworld)
+  - [Exercise](ValueIteration.cpp)
 
 - Implement Gambler's Problem
-  - [Exercise](Sources/GamblerProblem/main.swift)
+  - [Exercise](GamblersProblem.cpp)

@@ -1,26 +1,57 @@
-FORMATTER=docker run --rm -ti -v `pwd`:/source xiejw/swift-format /swift-format.sh
+default: PolicyEvaluation PolicyIteration ValueIteration GamblerProblem
 
-default: clean test
+include ../Makefile.template
 
-.PHONY: PolicyEvaluation, PolicyIteration, ValueIteration, GamblerProblem
+# {{{1 Object files.
 
-PolicyEvaluation:
-	swift run PolicyEvaluation
+POLICY_EVALUATION_LIBS += ${BIN}/Lib/DP/PolicyEvaluator.o
+POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorld/Model.o
+POLICY_EVALUATION_LIBS += ${BIN}/Lib/GridWorld/Policy.o
 
-PolicyIteration:
-	swift run PolicyIteration
+POLICY_ITERATION_LIBS += ${BIN}/Lib/DP/GreedyPolicy.o
+POLICY_ITERATION_LIBS += ${BIN}/Lib/DP/PolicyEvaluator.o
+POLICY_ITERATION_LIBS += ${BIN}/Lib/GridWorld/Model.o
+POLICY_ITERATION_LIBS += ${BIN}/Lib/GridWorld/Policy.o
 
-ValueIteration:
-	swift run ValueIteration
+VALUE_ITERATION_LIBS += ${BIN}/Lib/DP/GreedyPolicy.o
+VALUE_ITERATION_LIBS += ${BIN}/Lib/DP/PolicyEvaluator.o
+VALUE_ITERATION_LIBS += ${BIN}/Lib/GridWorld/Model.o
+VALUE_ITERATION_LIBS += ${BIN}/Lib/GridWorld/Policy.o
 
-GamblerProblem:
-	swift run GamblerProblem
+GAMBLER_PROBLEM_LIBS += ${BIN}/Lib/DP/GreedyPolicy.o
+GAMBLER_PROBLEM_LIBS += ${BIN}/Lib/DP/PolicyEvaluator.o
+GAMBLER_PROBLEM_LIBS += ${BIN}/Lib/GamblerProblem/Model.o
+GAMBLER_PROBLEM_LIBS += ${BIN}/Lib/GamblerProblem/Policy.o
 
-test:
-	swift test
+# {{{1 PolicyEvaluation
+.PHONY: PolicyEvaluation
+PolicyEvaluation: ${BIN} ${BIN}/PolicyEvaluation
 
-fmt:
-	${FORMATTER} Sources Tests
 
-clean:
-	swift package clean
+${BIN}/PolicyEvaluation: ${BIN}/PolicyEvaluation.o ${POLICY_EVALUATION_LIBS}
+	${CXX} -o $@ $^
+
+# {{{1 PolicyIteration
+.PHONY: PolicyIteration
+PolicyIteration: ${BIN} ${BIN}/PolicyIteration
+
+
+${BIN}/PolicyIteration: ${BIN}/PolicyIteration.o ${POLICY_ITERATION_LIBS}
+	${CXX} -o $@ $^
+
+# {{{1 ValueIteration
+.PHONY: ValueIteration
+ValueIteration: ${BIN} ${BIN}/ValueIteration
+
+
+${BIN}/ValueIteration: ${BIN}/ValueIteration.o ${VALUE_ITERATION_LIBS}
+	${CXX} -o $@ $^
+
+# {{{1 GamblerProblem
+.PHONY: GamblerProblem
+GamblerProblem: ${BIN} ${BIN}/GamblerProblem
+
+
+${BIN}/GamblerProblem: ${BIN}/GamblerProblem.o ${GAMBLER_PROBLEM_LIBS}
+	${CXX} -o $@ $^
+

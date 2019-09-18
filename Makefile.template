@@ -1,0 +1,28 @@
+# {{{1 Configuration.
+BIN = build
+CXX = clang++
+CLANG_FORMAT = clang-format -i -style=Google
+
+CXXFLAGS += -Wall -std=c++14 -I.
+
+SRCS := $(shell find . -type f -name '*.cpp')
+OBJ_FILES := $(patsubst %,${BIN}/%,$(SRCS:.cpp=.o))
+HEADERS := $(shell find . -type f -name '*.h')
+
+# {{{1 Default Actions.
+.PHONY: ${BIN}
+
+# Creates the parent folder for each source file under BIN.
+${BIN}:
+	mkdir -p ${BIN} `dirname ${SRCS} | sort | uniq | sed 's/\./${BIN}/g'`
+
+${BIN}/%.o: %.cpp ${HEADERS}
+	${CXX} ${CXXFLAGS} -c -o $@ $<
+
+# {{{1 Maintenance.
+
+clean:
+	rm -rf ${BIN}
+
+fmt:
+	find . -type f | grep -E "(.h|.cpp)$$" | xargs ${CLANG_FORMAT} ;

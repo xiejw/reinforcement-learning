@@ -1,17 +1,19 @@
-#ifndef MODEL
-#define MODEL
+#ifndef DP_MODEL
+#define DP_MODEL
 
 #include <memory>
 #include <tuple>
 #include <vector>
 
-namespace MC {
+#include "Lib/DP/Policy.h"
+
+namespace DP {
 
 using Reward = double;
 
-class Envinronment {
+class Model {
  public:
-  virtual std::tuple<Reward, bool, std::unique_ptr<State>> Next(
+  virtual std::vector<std::tuple<Reward, Probability, State>> Transition(
       State state, Action action) const = 0;
 
   virtual int StateSpaseSizt() const = 0;
@@ -21,6 +23,6 @@ class Envinronment {
   virtual bool IsTerminalState(State state) const = 0;
 };
 
-}  // namespace MC
+}  // namespace DP
 
 #endif
