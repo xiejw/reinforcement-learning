@@ -33,6 +33,13 @@
 
 ### Exercises
 
+Usage:
+
+    mkdir build
+    cd build
+    cmake ..
+    make PolicyEvaluation
+
 - Implement Policy Evaluation in Python (Gridworld)
   - [Exercise](PolicyEvaluation.cpp)
 
