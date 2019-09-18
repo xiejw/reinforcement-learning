@@ -1,0 +1,9 @@
+add_library(DP
+  Policy.h
+  PolicyEvaluator.cpp
+  ValueFunction.h
+  GreedyPolicy.cpp
+  GreedyPolicy.h
+  PolicyEvaluator.h
+  Model.h
+)
